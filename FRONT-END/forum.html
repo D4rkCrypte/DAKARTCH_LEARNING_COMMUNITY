@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum - DakarTech-Hack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Work+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="forum.css">
+    <script src="api-config.js"></script>
+</head>
+
+<body>
+    <div class="bg-effects">
+        <div class="grid-overlay"></div>
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <span class="logo-text">DakarTech-Hack</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Accueil</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">À propos</a></li>
+                <li class="nav-item"><a href="ctfs.html" class="nav-link">CTFs</a></li>
+                <li class="nav-item"><a href="mentors.html" class="nav-link">Mentors</a></li>
+                <li class="nav-item"><a href="actualite.html" class="nav-link">Actualité</a></li>
+                <li class="nav-item"><a href="forum.html" class="nav-link active">Forum</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="forum-section">
+        <div class="forum-container">
+            <div class="section-header">
+                <h2 class="section-title">Forum Communauté</h2>
+                <div class="title-underline"></div>
+                <p class="forum-intro">Espace d’échange entre professionnels et passionnés de cybersécurité. Posez vos
+                    questions, partagez vos write-ups et participez aux discussions.</p>
+            </div>
+
+            <!-- Connexion obligatoire avant l'accès complet au forum -->
+            <div id="forum-auth-gate" class="forum-auth-gate"
+                style="display:none; text-align: center; padding: 100px 0;">
+                <div class="forum-auth-card"
+                    style="max-width: 400px; margin: 0 auto; box-shadow: 0 20px 60px rgba(0,0,0,0.6); border-radius: 15px; padding: 40px;">
+                    <h3 class="forum-auth-title" style="font-size: 1.4rem; color: var(--accent-cyan);">Accès Restreint
+                    </h3>
+                    <p class="forum-auth-text" style="color: var(--text-gray); margin-bottom: 20px;">Redirection vers le
+                        portail d'authentification...</p>
+                    <div class="submit-form-message success"
+                        style="display:block; background: rgba(0, 255, 136, 0.1); border: 1px solid rgba(0, 255, 136, 0.3); color: #00FF88; padding: 10px; border-radius: 8px;">
+                        Veuillez patienter...</div>
+                </div>
+            </div>
+
+            <div id="forum-layout" class="forum-layout" style="display:none;">
+                <main class="forum-main">
+                    <!-- Section Profil Utilisateur en Haut -->
+                    <section class="forum-chat-section" id="user-profile-section"
+                        style="border-color: var(--accent-cyan); background: rgba(0, 217, 255, 0.05); text-align: center; margin-bottom: 20px;">
+                        <h3 class="subsection-title" style="border-bottom: none; margin-bottom: 5px;">Mon Profil</h3>
+                        <div style="font-size: 1.1rem; margin-bottom: 10px;">
+                            <span style="color: var(--text-gray);">Pseudo:</span>
+                            <span id="profile-username"
+                                style="color: var(--accent-cyan); font-weight: bold; font-family: 'Orbitron', sans-serif;"></span>
+                        </div>
+                        <div style="font-size: 0.95rem; display: flex; justify-content: center; gap: 20px;">
+                            <div>
+                                <span style="color: var(--text-gray);">Rôle:</span>
+                                <span id="profile-role"
+                                    style="color: var(--text-white); padding: 2px 8px; background: rgba(255,255,255,0.1); border-radius: 4px;"></span>
+                            </div>
+                            <div>
+                                <span style="color: var(--text-gray);">Email:</span>
+                                <span id="profile-email" style="color: var(--text-white);"></span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Chat communautaire type “mur de messages” -->
+                    <section class="forum-chat-section">
+                        <h3 class="subsection-title">Salon général de discussion</h3>
+                        <div id="forum-chat-messages" class="forum-chat-messages"
+                            style="height: 400px; overflow-y: auto; padding-right: 10px; display: flex; flex-direction: column;">
+                            <div
+                                style="text-align:center; color: var(--text-gray); margin-top: auto; margin-bottom: auto;">
+                                Chargement des messages...</div>
+                        </div>
+                        <form id="forumChatForm" class="forum-chat-form" style="position:relative;">
+                            <div id="reply-indicator"
+                                style="display:none; flex-direction: row; justify-content: space-between; background: rgba(0, 217, 255, 0.1); border-left: 3px solid var(--accent-cyan); padding: 5px 10px; font-size: 0.8rem; margin-bottom: 5px; border-radius: 4px;">
+                                <span style="color:var(--accent-cyan);">En réponse à <strong
+                                        id="reply-to-user"></strong></span>
+                                <button type="button" id="cancel-reply-btn"
+                                    style="background:none; border:none; color:var(--text-gray); cursor:pointer; font-size:1rem;">&times;</button>
+                            </div>
+                            <input type="hidden" id="chat-parent-id" name="parent_id" value="">
+                            <textarea id="chat-message-input" name="message" rows="3"
+                                placeholder="Écrivez votre message..."></textarea>
+                            <div class="chat-form-actions">
+                                <button type="submit" id="chatSubmitBtn" class="submit-form-btn">Envoyer</button>
+                            </div>
+                        </form>
+                    </section>
+
+
+                    <!-- Catégories classiques du forum -->
+                    <div class="forum-categories">
+                        <article class="forum-category">
+                            <div class="forum-category-header">
+                                <span class="forum-category-icon">💬</span>
+                                <div>
+                                    <h3 class="forum-category-title"><a href="#general">Général</a></h3>
+                                    <p class="forum-category-desc">Présentations, règles du forum, annonces officielles
+                                    </p>
+                                </div>
+                                <div class="forum-category-stats">
+                                    <span>24 sujets</span>
+                                    <span>156 messages</span>
+                                </div>
+                            </div>
+                            <ul class="forum-thread-list">
+                                <li class="forum-thread">
+                                    <a href="#t1" class="forum-thread-link">Bienvenue sur le forum DakarTech-Hack</a>
+                                    <span class="forum-thread-meta">par Admin · Il y a 2 j</span>
+                                </li>
+                                <li class="forum-thread">
+                                    <a href="#t2" class="forum-thread-link">Règles et charte de bonne conduite</a>
+                                    <span class="forum-thread-meta">par Modo · Il y a 1 sem.</span>
+                                </li>
+                            </ul>
+                        </article>
+
+                        <article class="forum-category">
+                            <div class="forum-category-header">
+                                <span class="forum-category-icon">🏴</span>
+                                <div>
+                                    <h3 class="forum-category-title"><a href="#ctf">CTF & Challenges</a></h3>
+                                    <p class="forum-category-desc">Write-ups, entraînement, partage de flags et
+                                        méthodologie</p>
+                                </div>
+                                <div class="forum-category-stats">
+                                    <span>42 sujets</span>
+                                    <span>312 messages</span>
+                                </div>
+                            </div>
+                            <ul class="forum-thread-list">
+                                <li class="forum-thread">
+                                    <a href="#t3" class="forum-thread-link">Write-up CTF Sénégal 2025 - Web 200</a>
+                                    <span class="forum-thread-meta">par CyberDakar · Il y a 3 j</span>
+                                </li>
+                                <li class="forum-thread">
+                                    <a href="#t4" class="forum-thread-link">Ressources pour s’entraîner au pwn</a>
+                                    <span class="forum-thread-meta">par PwnMaster · Il y a 5 j</span>
+                                </li>
+                            </ul>
+                        </article>
+
+                        <article class="forum-category">
+                            <div class="forum-category-header">
+                                <span class="forum-category-icon">🌐</span>
+                                <div>
+                                    <h3 class="forum-category-title"><a href="#web">Web Security</a></h3>
+                                    <p class="forum-category-desc">Injection, XSS, SSRF, sécurisation des applications
+                                        web</p>
+                                </div>
+                                <div class="forum-category-stats">
+                                    <span>38 sujets</span>
+                                    <span>289 messages</span>
+                                </div>
+                            </div>
+                            <ul class="forum-thread-list">
+                                <li class="forum-thread">
+                                    <a href="#t5" class="forum-thread-link">Exploitation SQLi sur lab volontaire</a>
+                                    <span class="forum-thread-meta">par WebSec · Il y a 1 j</span>
+                                </li>
+                                <li class="forum-thread">
+                                    <a href="#t6" class="forum-thread-link">Bonnes pratiques OWASP en entreprise</a>
+                                    <span class="forum-thread-meta">par DevSec · Il y a 4 j</span>
+                                </li>
+                            </ul>
+                        </article>
+
+                        <article class="forum-category">
+                            <div class="forum-category-header">
+                                <span class="forum-category-icon">⚙️</span>
+                                <div>
+                                    <h3 class="forum-category-title"><a href="#reverse">Reverse & Exploitation</a></h3>
+                                    <p class="forum-category-desc">Reverse engineering, binaires, exploitation,
+                                        forensics</p>
+                                </div>
+                                <div class="forum-category-stats">
+                                    <span>31 sujets</span>
+                                    <span>198 messages</span>
+                                </div>
+                            </div>
+                            <ul class="forum-thread-list">
+                                <li class="forum-thread">
+                                    <a href="#t7" class="forum-thread-link">ROP chain sur binaire 64 bits</a>
+                                    <span class="forum-thread-meta">par Reverser · Il y a 2 j</span>
+                                </li>
+                                <li class="forum-thread">
+                                    <a href="#t8" class="forum-thread-link">Outils forensics recommandés</a>
+                                    <span class="forum-thread-meta">par Forensix · Il y a 6 j</span>
+                                </li>
+                            </ul>
+                        </article>
+
+                        <article class="forum-category">
+                            <div class="forum-category-header">
+                                <span class="forum-category-icon">💼</span>
+                                <div>
+                                    <h3 class="forum-category-title"><a href="#career">Carrière & Emploi</a></h3>
+                                    <p class="forum-category-desc">Offres, certifications, parcours et conseils métier
+                                    </p>
+                                </div>
+                                <div class="forum-category-stats">
+                                    <span>19 sujets</span>
+                                    <span>87 messages</span>
+                                </div>
+                            </div>
+                            <ul class="forum-thread-list">
+                                <li class="forum-thread">
+                                    <a href="#t9" class="forum-thread-link">OSCP vs CEH : retour d’expérience</a>
+                                    <span class="forum-thread-meta">par RedTeam · Il y a 1 sem.</span>
+                                </li>
+                                <li class="forum-thread">
+                                    <a href="#t10" class="forum-thread-link">Stage cybersécurité Dakar – partage
+                                        d’offres</a>
+                                    <span class="forum-thread-meta">par Recruteur · Il y a 2 j</span>
+                                </li>
+                            </ul>
+                        </article>
+
+                        <article class="forum-category">
+                            <div class="forum-category-header">
+                                <span class="forum-category-icon">🛠️</span>
+                                <div>
+                                    <h3 class="forum-category-title"><a href="#tools">Outils & Ressources</a></h3>
+                                    <p class="forum-category-desc">Outils, scripts, docs et liens utiles</p>
+                                </div>
+                                <div class="forum-category-stats">
+                                    <span>27 sujets</span>
+                                    <span>164 messages</span>
+                                </div>
+                            </div>
+                            <ul class="forum-thread-list">
+                                <li class="forum-thread">
+                                    <a href="#t11" class="forum-thread-link">Setup environnement CTF (Docker + VMs)</a>
+                                    <span class="forum-thread-meta">par ToolBox · Il y a 4 j</span>
+                                </li>
+                                <li class="forum-thread">
+                                    <a href="#t12" class="forum-thread-link">Liste de plateformes de lab légales</a>
+                                    <span class="forum-thread-meta">par Ressources · Il y a 1 sem.</span>
+                                </li>
+                            </ul>
+                        </article>
+                    </div>
+
+                    <!-- NOUVELLE SECTION: MEMBRES DE LA COMMUNAUTÉ -->
+                    <section id="forum-members-section" class="forum-chat-section" style="margin-top: 40px;">
+                        <h3 class="subsection-title">Membres de la Communauté</h3>
+                        <p class="forum-rules-text" style="margin-bottom: 20px;">Retrouvez ici tous les hackers et
+                            passionnés qui font partie de DakarTech-Hack.</p>
+                        <div id="forum-members-grid" class="forum-members-grid"
+                            style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px;">
+                            <!-- Dynamically loaded -->
+                            <div class="loading-members"
+                                style="grid-column: 1/-1; text-align: center; color: var(--text-gray);">Chargement des
+                                membres...</div>
+                        </div>
+                    </section>
+                </main>
+
+                <aside class="forum-sidebar">
+                    <div class="forum-sidebar-block">
+                        <h4 class="forum-sidebar-title">Liens rapides</h4>
+                        <ul class="forum-quick-links">
+                            <li><a href="index.html">Accueil</a></li>
+                            <li><a href="about.html">À propos</a></li>
+                            <li><a href="ctfs.html">CTFs</a></li>
+                            <li><a href="actualite.html">Actualité</a></li>
+                            <li><a href="forum.html">Forum</a></li>
+                            <li><a href="#forum-members-section">Membres</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="join.html">Rejoindre</a></li>
+                        </ul>
+                    </div>
+                    <div class="forum-sidebar-block">
+                        <h4 class="forum-sidebar-title">Statistiques globales</h4>
+                        <ul class="forum-stats">
+                            <li><span class="forum-stat-value">181</span> sujets</li>
+                            <li><span class="forum-stat-value">1 206</span> messages</li>
+                            <li><span class="forum-stat-value">89</span> membres</li>
+                        </ul>
+                    </div>
+                    <div class="forum-sidebar-block">
+                        <h4 class="forum-sidebar-title">Membres en ligne</h4>
+                        <ul id="online-members-list" class="forum-online-list">
+                            <li class="online-member">cyber_student</li>
+                            <li class="online-member">blue_team</li>
+                        </ul>
+                    </div>
+                    <div class="forum-sidebar-block">
+                        <h4 class="forum-sidebar-title">Admins & mentors en ligne</h4>
+                        <ul id="online-admins-list" class="forum-online-list">
+                            <li class="online-admin">admin_root</li>
+                        </ul>
+                    </div>
+                    <div class="forum-sidebar-block">
+                        <h4 class="forum-sidebar-title">Règles</h4>
+                        <p class="forum-rules-text">Respect, pas de partage de malware, pas de contenu illégal. Éthique
+                            et entraide uniquement.</p>
+                    </div>
+                    <div class="forum-sidebar-block">
+                        <a href="contact.html" class="forum-cta" style="margin-bottom: 10px;">Nouveau sujet /
+                            Contact</a>
+                        <button type="button" id="forum-logout-btn" class="forum-cta"
+                            style="background: rgba(255, 51, 102, 0.1); color: #FF3366; border-color: #FF3366; display: none;">Se
+                            déconnecter</button>
+                    </div>
+
+                    <!-- Zone réservée Admin & Mentors -->
+                    <div id="forum-admin-zone" class="forum-sidebar-block forum-admin-zone" style="display:none;">
+                        <h4 class="forum-sidebar-title">Espace Admin & Mentors</h4>
+                        <p class="forum-rules-text">Zone réservée pour la gestion de la communauté et le partage de
+                            ressources avancées.</p>
+                        <ul class="forum-quick-links">
+                            <li><a href="admin.html">Gestion des Comptes (Users)</a></li>
+                            <li><a href="admin.html">Equipe & Membres (Team)</a></li>
+                            <li><a href="admin.html">Publier des ressources</a></li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-logo">DakarTech-Hack</h3>
+                    <p class="footer-description">Communauté d'apprentissage dédiée à la cybersécurité et aux
+                        compétitions CTF.</p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="ctfs.html">CTFs</a></li>
+                        <li><a href="actualite.html">Actualité</a></li>
+                        <li><a href="forum.html">Forum</a></li>
+                        <li><a href="join.html">Nous rejoindre</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Ressources</h4>
+                    <ul class="footer-links">
+                        <li><a href="ctfs.html">Plateforme CTF</a></li>
+                        <li><a href="actualite.html">Actualités</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Suivez-nous</h4>
+                    <div class="footer-social">
+                        <a href="#" class="social-link" aria-label="Discord">💬</a>
+                        <a href="#" class="social-link" aria-label="GitHub">🔗</a>
+                        <a href="#" class="social-link" aria-label="Twitter">🐦</a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">💼</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2024 DakarTech-Hack. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            const authGate = document.getElementById('forum-auth-gate');
+            const forumLayout = document.getElementById('forum-layout');
+            const adminZone = document.getElementById('forum-admin-zone');
+            const logoutBtn = document.getElementById('forum-logout-btn');
+
+            // Particules de fond
+            for (let i = 0; i < 15; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDelay = Math.random() * 10 + 's';
+                p.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                document.body.appendChild(p);
+            }
+
+            function applyRoleFromStorage() {
+                const token = localStorage.getItem('forumToken');
+                const role = localStorage.getItem('forumRole');
+                const username = localStorage.getItem('forumUsername');
+
+                if (!token || !role) {
+                    if (authGate) authGate.style.display = 'block';
+                    if (forumLayout) forumLayout.style.display = 'none';
+                    if (adminZone) adminZone.style.display = 'none';
+                    if (logoutBtn) logoutBtn.style.display = 'none';
+                    sessionStorage.setItem('logoutReason', 'Session expirée ou accès restreint.');
+                    setTimeout(() => { window.location.href = 'forum_login.html'; }, 1000);
+                    return;
+                }
+
+                if (authGate) authGate.style.display = 'none';
+                if (forumLayout) forumLayout.style.display = 'flex';
+                if (logoutBtn) logoutBtn.style.display = 'block';
+
+                // Profil display
+                const profUser = document.getElementById('profile-username');
+                const profRole = document.getElementById('profile-role');
+                const profEmail = document.getElementById('profile-email');
+                if (profUser) profUser.textContent = username || 'Inconnu';
+                if (profRole) profRole.textContent = role;
+                if (profEmail) profEmail.textContent = localStorage.getItem('forumEmail') || 'N/A';
+
+                // Admin zone visibility
+                if (adminZone) {
+                    adminZone.style.display = (role === 'ADMIN' || role === 'SUPERADMIN') ? 'block' : 'none';
+                }
+            }
+
+            // Logout
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function () {
+                    localStorage.clear();
+                    applyRoleFromStorage();
+                });
+            }
+
+            // --- COMMUNITY MEMBERS DISPLAY ---
+            async function loadForumMembers() {
+                const grid = document.getElementById('forum-members-grid');
+                if (!grid) return;
+                try {
+                    const r = await fetch(window.API + '/api/forum/members', {
+                        headers: window.apiHeaders(false) // Members list is public
+                    });
+                    const data = await r.json();
+                    if (data.success) {
+                        grid.innerHTML = '';
+                        if (data.data.members.length === 0) {
+                            grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--text-gray);">Aucun membre n\'est encore inscrit.</div>';
+                            return;
+                        }
+                        data.data.members.forEach(m => {
+                            const name = m.username || 'Anonyme';
+                            const initial = name.charAt(0).toUpperCase();
+                            const avatar = m.avatar_url;
+
+                            const div = document.createElement('div');
+                            div.className = 'forum-member-card';
+                            div.style.cssText = 'background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 15px; text-align: center; transition: all 0.3s ease;';
+                            div.onmouseover = () => { div.style.background = 'rgba(0, 217, 255, 0.05)'; div.style.borderColor = 'var(--accent-cyan)'; };
+                            div.onmouseout = () => { div.style.background = 'rgba(255,255,255,0.05)'; div.style.borderColor = 'rgba(255,255,255,0.1)'; };
+
+                            const avatarContainer = document.createElement('div');
+                            avatarContainer.style.cssText = 'width: 60px; height: 60px; border-radius: 50%; background: #333; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 2px solid var(--accent-cyan);';
+
+                            if (avatar && (avatar.startsWith('http') || avatar.startsWith('/'))) {
+                                const img = document.createElement('img');
+                                img.src = avatar;
+                                img.style.cssText = 'width: 100%; height: 100%; object-fit: cover;';
+                                avatarContainer.appendChild(img);
+                            } else {
+                                const span = document.createElement('span');
+                                span.style.cssText = "font-size: 1.5rem; font-family: 'Orbitron', sans-serif;";
+                                span.textContent = initial;
+                                avatarContainer.appendChild(span);
+                            }
+                            div.appendChild(avatarContainer);
+
+                            const nameDiv = document.createElement('div');
+                            nameDiv.style.cssText = "font-weight: bold; font-family: 'Orbitron', sans-serif; font-size: 0.9rem; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;";
+                            nameDiv.textContent = name;
+                            div.appendChild(nameDiv);
+
+                            const roleDiv = document.createElement('div');
+                            roleDiv.style.cssText = "font-size: 0.7rem; color: var(--text-gray); text-transform: uppercase;";
+                            roleDiv.textContent = 'Membre';
+                            div.appendChild(roleDiv);
+
+                            grid.appendChild(div);
+                        });
+                    }
+                } catch (err) { console.error('Load members error', err); }
+            }
+
+            // --- GLOBAL CHAT SYSTEM ---
+            const chatMessagesContainer = document.getElementById('forum-chat-messages');
+            const chatForm = document.getElementById('forumChatForm');
+            const chatInput = document.getElementById('chat-message-input');
+            let isUserScrolledUp = false;
+
+            if (chatMessagesContainer) {
+                chatMessagesContainer.addEventListener('scroll', () => {
+                    const isAtBottom = chatMessagesContainer.scrollHeight - chatMessagesContainer.scrollTop <= chatMessagesContainer.clientHeight + 50;
+                    isUserScrolledUp = !isAtBottom;
+                });
+
+                // Submit on Enter (Shift+Enter for new line)
+                if (chatInput) {
+                    chatInput.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                            e.preventDefault();
+                            chatForm.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+                        }
+                    });
+                }
+            }
+
+            async function loadChatMessages() {
+                if (!chatMessagesContainer) return;
+                try {
+                    const res = await fetch(window.API + '/api/chat/messages', {
+                        headers: window.apiHeaders()
+                    });
+                    const data = await res.json();
+
+                    if (data.success && data.data.messages) {
+                        const msgs = data.data.messages;
+                        if (msgs.length === 0) {
+                            chatMessagesContainer.innerHTML = '<div style="text-align:center; color: var(--text-gray); margin-top: auto; margin-bottom: auto;">Aucun message dans le salon. Soyez le premier !</div>';
+                            return;
+                        }
+
+                        const currentUserId = window.currentUser() ? window.currentUser().id : null;
+
+                        // We serialize the state of likes and messages to prevent unnecessary re-renders
+                        const currentMsgState = Array.from(chatMessagesContainer.querySelectorAll('.chat-message'))
+                            .map(m => m.dataset.id + '-' + (m.dataset.likes || 0))
+                            .join(',');
+                        const newMsgState = msgs.map(m => m.id + '-' + m.likes_count).join(',');
+
+                        if (currentMsgState !== newMsgState) {
+                            chatMessagesContainer.innerHTML = '';
+                            msgs.forEach(msg => {
+                                const isMine = String(msg.user_id) === String(currentUserId);
+                                const alignStyle = isMine ? 'align-self: flex-end;' : 'align-self: flex-start;';
+                                const bgColor = isMine ? 'rgba(0, 217, 255, 0.1)' : 'rgba(255,255,255,0.05)';
+                                const borderColor = isMine ? 'var(--accent-cyan)' : 'rgba(255,255,255,0.1)';
+                                const authorColor = isMine ? 'var(--accent-cyan)' : '#fff';
+
+                                const d = new Date(msg.created_at);
+                                const timeStr = isNaN(d) ? msg.created_at : d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                                const avatarBlock = msg.avatar_url
+                                    ? `<img src="${msg.avatar_url}" style="width:25px; height:25px; border-radius:50%; object-fit:cover; display:inline-block; vertical-align:middle; margin-${isMine ? 'left' : 'right'}:8px;">`
+                                    : '';
+
+                                const metaHtml = isMine
+                                    ? `<div class="chat-meta" style="justify-content: flex-end; margin-bottom: 5px;"><span class="chat-time" style="margin-right:8px; font-size: 0.7rem;">${timeStr}</span><span class="chat-author" style="color:${authorColor}; font-size: 0.85rem;">${escapeHtml(msg.username)}</span>${avatarBlock}</div>`
+                                    : `<div class="chat-meta" style="margin-bottom: 5px;">${avatarBlock}<span class="chat-author" style="color:${authorColor}; font-size: 0.85rem;">${escapeHtml(msg.username)}</span><span class="chat-time" style="margin-left:8px; font-size: 0.7rem;">${timeStr}</span></div>`;
+
+                                // Reply Block
+                                let replyHtml = '';
+                                if (msg.parent_id && msg.parent_message) {
+                                    replyHtml = `
+                                        <div style="font-size: 0.8rem; background: rgba(0,0,0,0.3); padding: 6px; border-left: 3px solid var(--accent-cyan); border-radius: 4px; margin-bottom: 8px; color: var(--text-gray); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                            <strong style="color:var(--accent-cyan);">${escapeHtml(msg.parent_username)}</strong>: ${escapeHtml(msg.parent_message)}
+                                        </div>
+                                    `;
+                                }
+
+                                // Variables to check if user can delete
+                                const currentUserRole = window.currentUser() ? window.currentUser().role : '';
+                                const canDelete = isMine || currentUserRole === 'SUPERADMIN';
+
+                                const deleteBtnHtml = canDelete ? `
+                                        <button type="button" class="chat-action-btn delete-btn" data-id="${msg.id}" style="background:none; border:none; color:var(--text-gray); cursor:pointer; padding:0; display:flex; align-items:center; gap:4px; margin-left:auto; transition: color 0.2s;" onmouseover="this.style.color='#ff4444';" onmouseout="this.style.color='var(--text-gray)';">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                        </button>
+                                ` : '';
+
+                                // Actions Block (Like / Reply / Delete)
+                                const hasLikedClass = msg.has_liked == 1 ? 'chat-liked' : '';
+                                const actionsHtml = `
+                                    <div class="chat-actions" style="margin-top: 8px; display: flex; gap: 10px; font-size: 0.8rem; width: 100%;">
+                                        <button type="button" class="chat-action-btn like-btn ${hasLikedClass}" data-id="${msg.id}" style="background:none; border:none; color:var(--text-gray); cursor:pointer; display:flex; align-items:center; gap:4px; padding:0; transition: transform 0.1s;" onmousedown="this.style.transform='scale(0.9)';" onmouseup="this.style.transform='scale(1)';">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+                                            <span style="font-weight:bold;">${msg.likes_count}</span>
+                                        </button>
+                                        <button type="button" class="chat-action-btn reply-btn" data-id="${msg.id}" data-username="${escapeHtml(msg.username)}" style="background:none; border:none; color:var(--text-gray); cursor:pointer; padding:0; display:flex; align-items:center; gap:4px;">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                                            Répondre
+                                        </button>
+                                        ${deleteBtnHtml}
+                                    </div>
+                                `;
+
+                                const div = document.createElement('div');
+                                div.className = 'chat-message';
+                                div.dataset.id = msg.id;
+                                div.dataset.likes = msg.likes_count;
+                                div.style.cssText = `max-width: 85%; min-width: 40%; width: max-content; padding: 12px 18px; border-radius: 12px; background: ${bgColor}; border: 1px solid ${borderColor}; margin-bottom: 12px; ${alignStyle} display: flex; flex-direction: column; transition: background 0.2s;`;
+
+                                const safeMessage = escapeHtml(msg.message);
+
+                                div.innerHTML = `
+                                    ${metaHtml}
+                                    ${replyHtml}
+                                    <div style="word-break: break-word; font-size: 0.95rem; line-height: 1.4;">${safeMessage.replace(/\n/g, '<br>')}</div>
+                                    ${actionsHtml}
+                                `;
+                                chatMessagesContainer.appendChild(div);
+                            });
+
+                            if (!isUserScrolledUp) {
+                                chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+                            }
+                        }
+                    }
+                } catch (err) {
+                    console.error('Erreur chargement chat', err);
+                }
+            }
+
+            function escapeHtml(unsafe) {
+                return (unsafe || '').replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+            }
+
+            // --- LIKE & REPLY EVENT DELEGATION ---
+            if (chatMessagesContainer) {
+                chatMessagesContainer.addEventListener('click', async (e) => {
+                    const likeBtn = e.target.closest('.like-btn');
+                    if (likeBtn) {
+                        const msgId = likeBtn.dataset.id;
+                        try {
+                            const res = await fetch(window.API + '/api/chat/like', {
+                                method: 'POST',
+                                headers: window.apiHeaders(),
+                                body: JSON.stringify({ message_id: msgId })
+                            });
+                            const data = await res.json();
+                            if (data.success) {
+                                // Optimistic update by reloading swiftly
+                                loadChatMessages();
+                            } else {
+                                if (data.error === "Non authentifié") window.location.href = 'forum_login.html';
+                            }
+                        } catch (err) { console.error("Like échoué", err); }
+                        return;
+                    }
+
+                    const replyBtn = e.target.closest('.reply-btn');
+                    if (replyBtn) {
+                        const msgId = replyBtn.dataset.id;
+                        const username = replyBtn.dataset.username;
+
+                        document.getElementById('chat-parent-id').value = msgId;
+                        document.getElementById('reply-to-user').textContent = username;
+                        document.getElementById('reply-indicator').style.display = 'flex';
+                        chatInput.focus();
+                        return;
+                    }
+
+                    const deleteBtn = e.target.closest('.delete-btn');
+                    if (deleteBtn) {
+                        if (!confirm("Voulez-vous vraiment supprimer ce message ?")) return;
+
+                        const msgId = deleteBtn.dataset.id;
+                        try {
+                            const res = await fetch(window.API + '/api/chat/delete', {
+                                method: 'POST',
+                                headers: window.apiHeaders(),
+                                body: JSON.stringify({ message_id: msgId })
+                            });
+                            const data = await res.json();
+                            if (data.success) {
+                                // Optimistic update
+                                loadChatMessages();
+                            } else {
+                                alert('Erreur: ' + (data.error || 'Impossible de supprimer le message'));
+                            }
+                        } catch (err) { console.error("Suppression échouée", err); }
+                        return;
+                    }
+                });
+            }
+
+            // Cancel Reply
+            const cancelReplyBtn = document.getElementById('cancel-reply-btn');
+            if (cancelReplyBtn) {
+                cancelReplyBtn.addEventListener('click', () => {
+                    document.getElementById('chat-parent-id').value = '';
+                    document.getElementById('reply-indicator').style.display = 'none';
+                });
+            }
+
+            if (chatForm) {
+                chatForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    if (!chatInput.value.trim()) return;
+
+                    const btn = document.getElementById('chatSubmitBtn');
+                    const originalText = btn.textContent;
+                    btn.textContent = '...';
+                    btn.disabled = true;
+
+                    const parentId = document.getElementById('chat-parent-id').value;
+                    const payload = { message: chatInput.value };
+                    if (parentId) payload.parent_id = parentId;
+
+                    try {
+                        const res = await fetch(window.API + '/api/chat/send', {
+                            method: 'POST',
+                            headers: window.apiHeaders(),
+                            body: JSON.stringify(payload)
+                        });
+                        const data = await res.json();
+                        if (data.success) {
+                            chatInput.value = '';
+                            document.getElementById('chat-parent-id').value = '';
+                            document.getElementById('reply-indicator').style.display = 'none';
+
+                            isUserScrolledUp = false;
+                            await loadChatMessages();
+                            chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+                        } else {
+                            if (data.error === "Non authentifié") {
+                                window.location.href = 'forum_login.html';
+                            } else {
+                                alert('Erreur: ' + (data.error || 'Impossible d\'envoyer le message'));
+                            }
+                        }
+                    } catch (err) {
+                        console.error("Envoi echoué", err);
+                    } finally {
+                        btn.textContent = originalText;
+                        btn.disabled = false;
+                        chatInput.focus();
+                    }
+                });
+            }
+
+            // Initial calls
+            applyRoleFromStorage();
+            loadForumMembers();
+            loadChatMessages();
+            setInterval(loadChatMessages, 3000); // Poll every 3 seconds
+
+        })();
+    </script>
+    <script src="nav-helper.js"></script>
+</body>
+
+</html>

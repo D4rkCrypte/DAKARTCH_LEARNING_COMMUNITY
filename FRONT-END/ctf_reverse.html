@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenges Reverse Engineering - DakarTech-Hack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Work+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="ctfs.css">
+</head>
+
+<body>
+    <div class="bg-effects">
+        <div class="grid-overlay"></div>
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <span class="logo-text">DakarTech-Hack</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Accueil</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">À propos</a></li>
+                <li class="nav-item"><a href="ctfs.html" class="nav-link active">CTFs</a></li>
+                <li class="nav-item"><a href="actualite.html" class="nav-link">Actualité</a></li>
+                <li class="nav-item"><a href="forum.html" class="nav-link">Forum</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="join-page-section" style="padding-top: 120px;">
+        <div class="about-container">
+            <div class="section-header">
+                <h2 class="section-title">Challenges Reverse Engineering</h2>
+                <div class="title-underline"></div>
+                <p class="ctfs-description">
+                    Binaire, crackme, obfuscation, anti-debug, sérialisation... tous les défis de
+                    <strong>Reverse Engineering</strong> seront centralisés ici, connectés à la base MySQL.
+                </p>
+            </div>
+
+            <div class="ctf-challenges-section">
+                <h3 class="subsection-title">Liste des Challenges</h3>
+                <div id="reverse-challenges-list" class="ctf-challenges-list">
+                    <div class="empty-state">
+                        <p>Les challenges Reverse seront affichés ici (catégorie REVERSE dans la base de données).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ctf-flag-section">
+                <h3 class="subsection-title">Valider un Flag</h3>
+                <form id="reverseFlagForm" class="ctf-flag-form">
+                    <div class="form-group">
+                        <label for="reverse-challenge-id">ID du challenge</label>
+                        <input type="number" id="reverse-challenge-id" name="challenge_id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reverse-flag">Flag</label>
+                        <input type="text" id="reverse-flag" name="flag" required>
+                    </div>
+                    <div id="reverseFlagMessage" class="submit-form-message"></div>
+                    <button type="submit" class="submit-form-btn">Vérifier le flag</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-logo">DakarTech-Hack</h3>
+                    <p class="footer-description">
+                        Communauté d'apprentissage dédiée à la cybersécurité et aux compétitions CTF.
+                    </p>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="ctfs.html">CTFs</a></li>
+                        <li><a href="actualite.html">Actualité</a></li>
+                        <li><a href="forum.html">Forum</a></li>
+                        <li><a href="join.html">Nous rejoindre</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Ressources</h4>
+                    <ul class="footer-links">
+                        <li><a href="ctfs.html">Plateforme CTF</a></li>
+                        <li><a href="actualite.html">Actualités</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Suivez-nous</h4>
+                    <div class="footer-social">
+                        <a href="#" class="social-link" aria-label="Discord">💬</a>
+                        <a href="#" class="social-link" aria-label="GitHub">🔗</a>
+                        <a href="#" class="social-link" aria-label="Twitter">🐦</a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">💼</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    &copy; 2024 DakarTech-Hack. Tous droits réservés.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
+        });
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            });
+        });
+
+        document.getElementById('reverseFlagForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const msg = document.getElementById('reverseFlagMessage');
+            const btn = this.querySelector('.submit-form-btn');
+            msg.textContent = 'Vérification du flag...';
+            msg.className = 'submit-form-message';
+            btn.disabled = true;
+
+            try {
+                const fd = new FormData(this);
+                const response = await fetch('php/ctf_check_flag.php', {
+                    method: 'POST',
+                    body: fd
+                });
+                const data = await response.json();
+                if (data.success) {
+                    msg.textContent = data.message || 'Bravo, flag valide !';
+                    msg.classList.add('success');
+                } else {
+                    msg.textContent = data.error || 'Flag invalide.';
+                    msg.classList.add('error');
+                }
+            } catch (error) {
+                msg.textContent = 'Backend PHP non disponible pour le moment. La vérification sera activée après configuration de la base de données.';
+                msg.classList.add('error');
+            } finally {
+                btn.disabled = false;
+            }
+        });
+    </script>
+    <script src="nav-helper.js"></script>
+</body>
+
+</html>

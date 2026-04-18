@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warzone CTF - DakarTech-Hack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Work+Sans:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="ctfs.css">
+    <script src="api-config.js"></script>
+</head>
+
+<body>
+
+    <!-- Background Effects -->
+    <div class="bg-effects">
+        <div class="grid-overlay"></div>
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link"><span class="logo-text">DakarTech-Hack</span></a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Accueil</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">À propos</a></li>
+                <li class="nav-item"><a href="ctfs.html" class="nav-link active">CTFs</a></li>
+                <li class="nav-item"><a href="actualite.html" class="nav-link">Actualité</a></li>
+                <li class="nav-item"><a href="forum.html" class="nav-link">Forum</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                <li id="userIndicator" class="nav-item" style="display:none;"><a href="forum_login.html"
+                        class="nav-link" style="color:var(--accent-cyan);">Mon Profil</a></li>
+                <li id="loginPrompt" class="nav-item"><a href="forum_login.html" class="nav-link"
+                        style="color:#ff3366;">Se Connecter</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- CTF Hero Section -->
+    <section class="ctf-hero">
+        <div class="hero-content">
+            <h1 class="glitch-title">WARZONE CTF</h1>
+            <p class="typewriter-desc">Développez vos compétences offensives et défensives. Téléchargez les archives,
+                trouvez la vulnérabilité, capturez le flag et validez vos acquis sur notre infrastructure.</p>
+        </div>
+    </section>
+
+    <!-- Filters -->
+    <div class="ctf-filters" id="ctfFilters">
+        <button class="filter-btn active" data-filter="all">Tous les Challenges</button>
+        <button class="filter-btn" data-filter="web">Web Security</button>
+        <button class="filter-btn" data-filter="crypto">Cryptographie</button>
+        <button class="filter-btn" data-filter="pwn">Exploitation / Pwn</button>
+        <button class="filter-btn" data-filter="reverse">Reverse Engineering</button>
+        <button class="filter-btn" data-filter="network">Réseau</button>
+        <button class="filter-btn" data-filter="osint_forensics">OSINT & Forensics</button>
+    </div>
+
+    <!-- Challenges Area -->
+    <div id="ctfGrid" class="challenges-grid">
+        <div style="grid-column: 1/-1; text-align: center; color: var(--text-gray); padding: 50px;">
+            <div
+                style="display:inline-block; border: 3px solid rgba(0, 217, 255, 0.3); border-top-color: var(--accent-cyan); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite;">
+            </div>
+            <p style="margin-top: 15px; font-family: 'Orbitron', sans-serif;">Connexion à la matrice...</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-main">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>DakarTech<span>Hack</span></h3>
+                <p style="color:var(--text-gray); line-height:1.6;">L'élite de la cybersécurité au Sénégal. Forgez vos
+                    compétences, protégez l'infrastructure.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="ctfs.html">Warzone CTFs</a></li>
+                    <li><a href="forum.html">Forum</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Ressources</h4>
+                <ul>
+                    <li><a href="actualite.html">Actualités</a></li>
+                    <li><a href="contact.html">Besoin d'aide ?</a></li>
+                    <li><a href="about.html">À Propos</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 DakarTech-Hack. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <style>
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+    <script>
+        let allChallenges = [];
+        let isAuthenticated = false;
+
+        async function initCTF() {
+            // Sécurité : Redirection immédiate si non connecté
+            if (!window.requireAuth(['MEMBER', 'MENTOR', 'ADMIN', 'SUPERADMIN'])) return;
+
+            // Check auth status purely locally
+            if (localStorage.getItem('forumToken')) {
+                isAuthenticated = true;
+                const ind = document.getElementById('userIndicator');
+                ind.style.display = 'block';
+                const role = localStorage.getItem('forumRole');
+                ind.querySelector('a').href = (role === 'ADMIN' || role === 'SUPERADMIN') ? 'admin.html' : 'dashboard.html';
+                document.getElementById('loginPrompt').style.display = 'none';
+            }
+
+            try {
+                // Fetch challenges safely using custom headers
+                const res = await fetch(window.API + '/api/ctf', {
+                    headers: window.apiHeaders()
+                });
+                const data = await res.json();
+
+                if (data.success && data.data.challenges) {
+                    allChallenges = data.data.challenges;
+                    renderChallenges('all');
+                } else {
+                    displayError('Impossible de charger les challenges.');
+                }
+            } catch (err) {
+                console.error(err);
+                displayError('Une erreur réseau est survenue. Vérifiez que l\'API est en ligne.');
+            }
+        }
+
+        function displayError(msg) {
+            document.getElementById('ctfGrid').innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: #ff3366; padding: 50px; font-weight: bold; background: rgba(255,0,0,0.1); border: 1px solid rgba(255,0,0,0.3); border-radius: 12px;">${msg}</div>`;
+        }
+
+        function renderChallenges(filterStr) {
+            const grid = document.getElementById('ctfGrid');
+            grid.innerHTML = '';
+
+            const filtered = filterStr === 'all'
+                ? allChallenges
+                : allChallenges.filter(c => c.category.toLowerCase() === filterStr.toLowerCase());
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-gray); padding: 50px;">Aucun challenge disponible dans cette catégorie.</div>`;
+                return;
+            }
+
+            filtered.forEach((ctf, idx) => {
+                const isSolved = ctf.is_solved;
+                const cardStateClass = isSolved ? 'card-solved' : '';
+
+                // Actions build (Download + Submit)
+                let actionsHtml = '';
+
+                // File URL Link
+                if (ctf.file_url) {
+                    actionsHtml += `
+                        <a href="${ctf.file_url}" target="_blank" class="download-btn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            Ressources
+                        </a>
+                    `;
+                }
+
+                // If not authenticated, prompt to login. 
+                // If authenticated and solved, show SOLVED badge.
+                // If authenticated and not solved, show FLAG input.
+                if (!isAuthenticated) {
+                    actionsHtml += `
+                        <div style="background: rgba(255, 51, 102, 0.1); border: 1px solid rgba(255, 51, 102, 0.3); padding: 10px; border-radius: 8px; text-align: center; font-size: 0.85rem;">
+                            <a href="forum_login.html" style="color: #ff3366; text-decoration: none; font-weight: bold;">[!] Connexion requise</a> pour soumettre un Flag.
+                        </div>
+                    `;
+                } else if (isSolved) {
+                    actionsHtml += `
+                        <div class="ctf-solved-overlay">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            COMPROMIS
+                        </div>
+                    `;
+                } else {
+                    actionsHtml += `
+                        <form class="flag-submission" onsubmit="submitFlag(event, ${ctf.id})">
+                            <input type="text" id="flagInput-${ctf.id}" class="flag-input" placeholder="DTK{...}" required>
+                            <button type="submit" class="flag-submit-btn" id="btnSubmit-${ctf.id}">PWN</button>
+                        </form>
+                    `;
+                }
+
+                // Build Card Structure
+                const card = document.createElement('div');
+                card.className = `ctf-card fade-in ${cardStateClass}`;
+                // Add staggered animation delay
+                card.style.animationDelay = (idx * 0.1) + 's';
+
+                card.innerHTML = `
+                    <div class="card-header">
+                        <div>
+                            <h3 class="ctf-title">${escapeXml(ctf.title)}</h3>
+                            <span class="ctf-badge badge-${ctf.category.toLowerCase().replace('/', '_')}">${escapeXml(ctf.category)}</span>
+                        </div>
+                        <div class="ctf-points">
+                            ${ctf.points} <span style="font-size:0.7rem; color:var(--text-gray);">PTS</span>
+                        </div>
+                    </div>
+                    <div class="ctf-desc">
+                        ${escapeXml(ctf.description)}
+                    </div>
+                    <div class="ctf-actions">
+                        ${actionsHtml}
+                    </div>
+                `;
+
+                grid.appendChild(card);
+            });
+        }
+
+        // Filter button logic
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                // Remove active class from all
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                // Add active class to clicked
+                this.classList.add('active');
+
+                const filterValue = this.getAttribute('data-filter');
+                renderChallenges(filterValue);
+            });
+        });
+
+        // Submit Flag logic
+        async function submitFlag(e, challengeId) {
+            e.preventDefault();
+            const input = document.getElementById('flagInput-' + challengeId);
+            const btn = document.getElementById('btnSubmit-' + challengeId);
+            const originalBg = input.style.background;
+
+            const flagValue = input.value.trim();
+            if (!flagValue) return;
+
+            btn.disabled = true;
+            btn.textContent = '...';
+
+            try {
+                const res = await fetch(window.API + '/api/ctf/submit', {
+                    method: 'POST',
+                    headers: window.apiHeaders(),
+                    body: JSON.stringify({
+                        challenge_id: challengeId,
+                        flag: flagValue
+                    })
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    // Update successfully
+                    input.style.background = 'rgba(0, 255, 136, 0.2)';
+                    input.style.borderColor = '#00ff88';
+                    setTimeout(() => {
+                        // Mark locally and re-render current filter category
+                        const ctfObj = allChallenges.find(c => c.id == challengeId);
+                        if (ctfObj) ctfObj.is_solved = true;
+
+                        const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+                        renderChallenges(activeFilter);
+                    }, 1000);
+                } else {
+                    // Fail response
+                    input.style.background = 'rgba(255, 51, 102, 0.2)';
+                    input.style.borderColor = '#ff3366';
+                    input.value = '';
+                    input.placeholder = data.error || 'Erreur...';
+                    setTimeout(() => {
+                        input.style.background = originalBg;
+                        input.style.borderColor = 'rgba(0, 217, 255, 0.2)';
+                        input.placeholder = 'DTK{...}';
+                        btn.disabled = false;
+                        btn.textContent = 'PWN';
+                    }, 2000);
+                }
+
+            } catch (err) {
+                console.error(err);
+                btn.disabled = false;
+                btn.textContent = 'PWN';
+            }
+        }
+
+        function escapeXml(unsafe) {
+            if (!unsafe) return '';
+            return unsafe.replace(/[<>&'"]/g, function (c) {
+                switch (c) {
+                    case '<': return '&lt;';
+                    case '>': return '&gt;';
+                    case '&': return '&amp;';
+                    case '\'': return '&apos;';
+                    case '"': return '&quot;';
+                }
+            });
+        }
+
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', initCTF);
+    </script>
+
+    <script src="nav-helper.js"></script>
+</body>
+
+</html>

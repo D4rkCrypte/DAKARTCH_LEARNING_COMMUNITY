@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - DakarTech-Hack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Work+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="contact.css">
+    <script src="api-config.js"></script>
+</head>
+
+<body>
+    <!-- Background Effects -->
+    <div class="bg-effects">
+        <div class="grid-overlay"></div>
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <span class="logo-text">DakarTech-Hack</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">À propos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="ctfs.html" class="nav-link">CTFs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="actualite.html" class="nav-link">Actualité</a>
+                </li>
+                <li class="nav-item">
+                    <a href="forum.html" class="nav-link">Forum</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link active">Contact</a>
+                </li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="about-container">
+            <!-- <div class="section-header">
+                <h2 class="section-title">Contactez-nous</h2>
+                <div class="title-underline"></div>
+                <p class="contact-intro-text">
+                    Vous avez des questions, des suggestions ou souhaitez nous rejoindre ? 
+                    Nous serons ravis de vous répondre et d'échanger avec vous.
+                </p>
+            </div> -->
+
+            <div class="contact-grid">
+                <!-- Formulaire de Contact -->
+                <div class="contact-form-wrapper">
+                    <div class="contact-form-header">
+                        <h3 class="form-section-title">Envoyez-nous un message</h3>
+                        <p class="form-section-subtitle">Remplissez le formulaire ci-dessous et nous vous répondrons
+                            dans les plus brefs délais</p>
+                    </div>
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-group">
+                            <label for="name" class="form-label">
+                                <span class="label-text">Nom complet</span>
+                                <span class="label-required">*</span>
+                            </label>
+                            <input type="text" id="name" name="name" class="form-input" required
+                                placeholder="Votre nom complet">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">
+                                <span class="label-text">Adresse email</span>
+                                <span class="label-required">*</span>
+                            </label>
+                            <input type="email" id="email" name="email" class="form-input" required
+                                placeholder="votre.email@exemple.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject" class="form-label">
+                                <span class="label-text">Sujet</span>
+                                <span class="label-required">*</span>
+                            </label>
+                            <select id="subject" name="subject" class="form-select" required>
+                                <option value="">Sélectionner un sujet</option>
+                                <option value="join">Rejoindre la communauté</option>
+                                <option value="ctf">Question sur les CTFs</option>
+                                <option value="partnership">Partenariat</option>
+                                <option value="event">Organisation d'événements</option>
+                                <option value="other">Autre</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="form-label">
+                                <span class="label-text">Message</span>
+                                <span class="label-required">*</span>
+                            </label>
+                            <textarea id="message" name="message" class="form-textarea" required rows="6"
+                                placeholder="Décrivez votre demande ou votre question en détail..."></textarea>
+                        </div>
+
+                        <div id="formAlert" class="form-alert-container"></div>
+
+                        <button type="submit" class="btn-submit">
+                            <span class="btn-text">Envoyer le message</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Informations de Contact -->
+                <div class="contact-info-wrapper">
+                    <div class="contact-info-header">
+                        <h3 class="form-section-title">Nos Coordonnées</h3>
+                        <p class="form-section-subtitle">Plusieurs moyens de nous contacter et de nous suivre</p>
+                    </div>
+
+                    <div class="contact-info-list">
+                        <div class="contact-info-card">
+                            <div class="info-icon-wrapper">
+                                <div class="info-icon">💬</div>
+                            </div>
+                            <div class="info-content">
+                                <h4 class="info-title">Discord</h4>
+                                <p class="info-text">Rejoignez notre serveur Discord pour des discussions en temps réel
+                                    avec la communauté</p>
+                                <a href="#" class="info-link">
+                                    <span>Rejoindre Discord</span>
+                                    <span class="link-arrow">→</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-card">
+                            <div class="info-icon-wrapper">
+                                <div class="info-icon">📧</div>
+                            </div>
+                            <div class="info-content">
+                                <h4 class="info-title">Email</h4>
+                                <p class="info-text">Pour les questions formelles, les partenariats et les demandes
+                                    officielles</p>
+                                <a href="mailto:contact@dakartech-hack.sn" class="info-link">
+                                    <span>contact@dakartech-hack.sn</span>
+                                    <span class="link-arrow">→</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-card">
+                            <div class="info-icon-wrapper">
+                                <div class="info-icon">🌐</div>
+                            </div>
+                            <div class="info-content">
+                                <h4 class="info-title">Forum</h4>
+                                <p class="info-text">Posez vos questions et partagez vos connaissances sur notre forum
+                                    communautaire</p>
+                                <a href="forum.html" class="info-link">
+                                    <span>Accéder au Forum</span>
+                                    <span class="link-arrow">→</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-main">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>DakarTech<span>Hack</span></h3>
+                <p style="color:var(--text-gray); line-height:1.6;">L'élite de la cybersécurité au Sénégal. Forgez vos
+                    compétences, protégez l'infrastructure.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="ctfs.html">Warzone CTFs</a></li>
+                    <li><a href="forum.html">Forum</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Ressources</h4>
+                <ul>
+                    <li><a href="actualite.html">Actualités</a></li>
+                    <li><a href="contact.html">Besoin d'aide ?</a></li>
+                    <li><a href="about.html">À Propos</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 DakarTech-Hack. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Particles -->
+    <script>
+        // Create floating particles
+        for (let i = 0; i < 15; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            document.body.appendChild(particle);
+        }
+
+        // Gestion du formulaire de contact
+
+        // Gestion du formulaire de contact
+        document.getElementById('contactForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const alertContainer = document.getElementById('formAlert');
+            const submitBtn = this.querySelector('.btn-submit');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const originalText = btnText.textContent;
+
+            const body = {
+                fullName: formData.get('name'),
+                email: formData.get('email'),
+                subject: formData.get('subject'),
+                message: formData.get('message')
+            };
+
+            btnText.textContent = 'Envoi en cours...';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch(window.API + '/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    alertContainer.innerHTML = `
+                        <div class="alert alert-success">
+                            <span class="alert-icon">✓</span>
+                            <span class="alert-message">Message envoyé avec succès ! Nous vous répondrons bientôt.</span>
+                        </div>
+                    `;
+                    this.reset();
+                    setTimeout(() => {
+                        alertContainer.innerHTML = '';
+                    }, 5000);
+                } else {
+                    const errorMsg = result.errors ? result.errors.join('<br>') : (result.error || 'Une erreur est survenue');
+                    alertContainer.innerHTML = `
+                        <div class="alert alert-error">
+                            <span class="alert-icon">✗</span>
+                            <span class="alert-message">${errorMsg}</span>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                alertContainer.innerHTML = `
+                    <div class="alert alert-error">
+                        <span class="alert-icon">✗</span>
+                        <span class="alert-message">Erreur de connexion. Veuillez réessayer plus tard.</span>
+                    </div>
+                `;
+            } finally {
+                btnText.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+    <script src="nav-helper.js"></script>
+</body>
+
+</html>

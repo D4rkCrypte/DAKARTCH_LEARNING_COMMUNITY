@@ -1,0 +1,302 @@
+/* Premium CTFs Page Styles */
+:root {
+    --ctf-web: #ff3366;
+    --ctf-crypto: #00ffcc;
+    --ctf-pwn: #ff0055;
+    --ctf-reverse: #ffaa00;
+    --ctf-network: #0088ff;
+    --ctf-osint: #aa00ff;
+}
+
+body {
+    background-color: #050a15;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(0, 217, 255, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(255, 51, 102, 0.05) 0%, transparent 40%);
+    color: #fff;
+    min-height: 100vh;
+}
+
+/* Hero Section */
+.ctf-hero {
+    position: relative;
+    padding: 180px 20px 80px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.ctf-hero::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0,217,255,0.1) 0%, transparent 70%);
+    z-index: 0;
+    animation: pulseGlow 4s infinite alternate;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.glitch-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(0, 217, 255, 0.6);
+    margin-bottom: 20px;
+}
+
+.typewriter-desc {
+    font-size: 1.2rem;
+    color: var(--text-gray);
+    line-height: 1.8;
+}
+
+/* Filters */
+.ctf-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 40px auto 60px;
+    max-width: 1000px;
+}
+
+.filter-btn {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-gray);
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+}
+
+.filter-btn:hover {
+    border-color: rgba(0, 217, 255, 0.5);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background: rgba(0, 217, 255, 0.15);
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+}
+
+/* Challenges Grid */
+.challenges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    padding: 0 5%;
+    margin-bottom: 100px;
+    max-width: 1400px;
+    margin: 0 auto 100px;
+}
+
+/* CTF Card */
+.ctf-card {
+    background: rgba(10, 22, 40, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    backdrop-filter: blur(15px);
+}
+
+.ctf-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.ctf-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(0, 217, 255, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 0 30px rgba(0, 217, 255, 0.05);
+}
+
+.ctf-card:hover::before {
+    opacity: 1;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.ctf-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.4rem;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.ctf-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 6px;
+    letter-spacing: 1px;
+}
+
+.badge-web { background: rgba(255, 51, 102, 0.1); color: var(--ctf-web); border: 1px solid rgba(255, 51, 102, 0.3); }
+.badge-crypto { background: rgba(0, 255, 204, 0.1); color: var(--ctf-crypto); border: 1px solid rgba(0, 255, 204, 0.3); }
+.badge-pwn { background: rgba(255, 0, 85, 0.1); color: var(--ctf-pwn); border: 1px solid rgba(255, 0, 85, 0.3); }
+.badge-reverse { background: rgba(255, 170, 0, 0.1); color: var(--ctf-reverse); border: 1px solid rgba(255, 170, 0, 0.3); }
+.badge-network { background: rgba(0, 136, 255, 0.1); color: var(--ctf-network); border: 1px solid rgba(0, 136, 255, 0.3); }
+.badge-osint_forensics { background: rgba(170, 0, 255, 0.1); color: var(--ctf-osint); border: 1px solid rgba(170, 0, 255, 0.3); }
+
+.ctf-points {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--accent-cyan);
+    font-size: 1.1rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.ctf-desc {
+    color: var(--text-gray);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    flex: 1;
+}
+
+/* Download / Action Buttons */
+.ctf-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: auto;
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+.download-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Flag Submission */
+.flag-submission {
+    display: flex;
+    gap: 10px;
+    position: relative;
+}
+
+.flag-input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 217, 255, 0.2);
+    border-radius: 8px;
+    padding: 12px 15px;
+    color: #fff;
+    font-family: monospace;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+}
+
+.flag-input:focus {
+    outline: none;
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 15px rgba(0, 217, 255, 0.2);
+}
+
+.flag-submit-btn {
+    background: var(--accent-cyan);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    padding: 0 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+
+.flag-submit-btn:hover {
+    background: #fff;
+    transform: scale(1.05);
+}
+
+.ctf-solved-overlay {
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid rgba(0, 255, 136, 0.4);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    color: #00ff88;
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.card-solved {
+    border-color: rgba(0, 255, 136, 0.3);
+}
+
+.card-solved::before {
+    background: linear-gradient(90deg, transparent, #00ff88, transparent);
+}
+
+/* Animations */
+@keyframes pulseGlow {
+    from { opacity: 0.3; transform: translate(-50%, -50%) scale(0.9); }
+    to { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+@keyframes slideUpFade {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: slideUpFade 0.6s ease-out forwards;
+}

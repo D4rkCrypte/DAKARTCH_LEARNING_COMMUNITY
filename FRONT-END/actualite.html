@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualité Cybersécurité - DakarTech-Hack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Work+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="api-config.js"></script>
+</head>
+
+<body>
+    <!-- Background Effects -->
+    <div class="bg-effects">
+        <div class="grid-overlay"></div>
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <span class="logo-text">DakarTech-Hack</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">À propos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="ctfs.html" class="nav-link">CTFs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="actualite.html" class="nav-link active">Actualité</a>
+                </li>
+                <li class="nav-item">
+                    <a href="forum.html" class="nav-link">Forum</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- News Section -->
+    <section class="about-section">
+        <div class="about-container">
+            <div class="section-header">
+                <h2 class="section-title">Actualités Cybersécurité</h2>
+                <div class="title-underline"></div>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <div class="news-tabs">
+                <button class="news-tab active" data-tab="general">
+
+                    <span class="tab-text">Actualités Générales</span>
+                </button>
+                <button class="news-tab" data-tab="conferences">
+
+                    <span class="tab-text">Conférences</span>
+                </button>
+                <button class="news-tab" data-tab="ctf">
+
+                    <span class="tab-text">CTF</span>
+                </button>
+            </div>
+
+            <!-- Tab Content: Actualités Générales -->
+            <div class="news-tab-content active" id="tab-general">
+                <div class="news-content" id="news-container-dynamic">
+                    <!-- Loaded dynamically -->
+                    <div style="text-align: center; color: var(--text-gray); padding: 50px;">Chargement des
+                        actualités...</div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Conférences -->
+            <div class="news-tab-content" id="tab-conferences">
+                <div class="news-content">
+                    <div class="news-card">
+                        <div class="news-header">
+                            <span class="news-date">Août 2026</span>
+                            <span class="news-category">Conférence</span>
+                        </div>
+                        <h3 class="news-title">Black Hat USA 2026 : Les dernières menaces en cybersécurité</h3>
+                        <p class="news-description">
+                            La conférence Black Hat USA 2026 rassemble les meilleurs experts en sécurité pour présenter
+                            les dernières
+                            vulnérabilités, techniques d'attaque et solutions de défense. Plus de 300 sessions
+                            techniques et des
+                            formations pratiques de haut niveau.
+                        </p>
+                        <div class="news-tags">
+                            <a class="news-tag" href="https://www.blackhat.com/" target="_blank"
+                                rel="noopener noreferrer">
+                                Site officiel Black Hat
+                            </a>
+                            <span class="news-tag">Conférence</span>
+                            <span class="news-tag">États-Unis</span>
+                        </div>
+                    </div>
+
+                    <div class="news-card">
+                        <div class="news-header">
+                            <span class="news-date">Mai 2026</span>
+                            <span class="news-category">Conférence</span>
+                        </div>
+                        <h3 class="news-title">Secodojo 2026 : La cybersécurité en Afrique</h3>
+                        <p class="news-description">
+                            Secodojo est la plus grande conférence de cybersécurité en Afrique de l'Ouest. L'édition
+                            2026 mettra l'accent
+                            sur les défis spécifiques du continent, les solutions locales et le renforcement des
+                            capacités en sécurité
+                            informatique pour les entreprises africaines.
+                        </p>
+                        <div class="news-tags">
+                            <a class="news-tag" href="https://secodojo.com/" target="_blank" rel="noopener noreferrer">
+                                Site officiel Secodojo
+                            </a>
+                            <span class="news-tag">Conférence</span>
+                            <span class="news-tag">Afrique</span>
+                        </div>
+                    </div>
+
+                    <div class="news-card">
+                        <div class="news-header">
+                            <span class="news-date">Mars 2026</span>
+                            <span class="news-category">Conférence</span>
+                        </div>
+                        <h3 class="news-title">DEF CON 2026 : Le plus grand rassemblement de hackers</h3>
+                        <p class="news-description">
+                            DEF CON rassemble des milliers de hackers, chercheurs en sécurité et passionnés pour des
+                            présentations,
+                            des villages thématiques et des compétitions. L'édition 2026 promet des révélations sur les
+                            dernières
+                            techniques d'exploitation et de défense.
+                        </p>
+                        <div class="news-tags">
+                            <a class="news-tag" href="https://defcon.org/" target="_blank" rel="noopener noreferrer">
+                                Site officiel DEF CON
+                            </a>
+                            <span class="news-tag">Conférence</span>
+                            <span class="news-tag">Hacking</span>
+                        </div>
+                    </div>
+
+                    <div class="news-card">
+                        <div class="news-header">
+                            <span class="news-date">Avril 2026</span>
+                            <span class="news-category">Conférence</span>
+                        </div>
+                        <h3 class="news-title">RSA Conference 2026 : Innovation et sécurité</h3>
+                        <p class="news-description">
+                            La RSA Conference est l'un des plus grands événements mondiaux dédiés à la cybersécurité.
+                            L'édition 2026
+                            explorera les tendances émergentes, l'IA en sécurité, la protection des identités et les
+                            stratégies de
+                            défense contre les menaces avancées.
+                        </p>
+                        <div class="news-tags">
+                            <a class="news-tag" href="https://www.rsaconference.com/" target="_blank"
+                                rel="noopener noreferrer">
+                                Site officiel RSA
+                            </a>
+                            <span class="news-tag">Conférence</span>
+                            <span class="news-tag">Innovation</span>
+                        </div>
+                    </div>
+
+                    <div class="news-card">
+                        <div class="news-header">
+                            <span class="news-date">Juin 2026</span>
+                            <span class="news-category">Conférence</span>
+                        </div>
+                        <h3 class="news-title">Africa Cyber Security Summit 2026</h3>
+                        <p class="news-description">
+                            Le sommet africain de cybersécurité réunit les leaders du secteur, les décideurs politiques
+                            et les experts
+                            techniques pour discuter des enjeux de sécurité numérique sur le continent. Focus sur la
+                            coopération
+                            régionale et le développement des compétences locales.
+                        </p>
+                        <div class="news-tags">
+                            <span class="news-tag">Conférence</span>
+                            <span class="news-tag">Afrique</span>
+                            <span class="news-tag">Sommet</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: CTF -->
+            <div class="news-tab-content" id="tab-ctf">
+                <!-- CTF Sub-tabs -->
+                <div class="ctf-subtabs">
+                    <button class="ctf-subtab active" data-subtab="senegal">Sénégal</button>
+                    <button class="ctf-subtab" data-subtab="afrique">Afrique</button>
+                    <button class="ctf-subtab" data-subtab="europe">Europe</button>
+                    <button class="ctf-subtab" data-subtab="autres">Autres</button>
+                </div>
+
+                <!-- CTF Sénégal -->
+                <!-- <div class="ctf-subtab-content active" id="subtab-senegal">
+                    <div class="news-content">
+                        <div class="news-card">
+                            <div class="news-header">
+                                <span class="news-date">Mars 2026</span>
+                                <span class="news-category">CTF Sénégal</span>
+                            </div>
+                            <h3 class="news-title">DakarCTF 2026 : Compétition nationale de cybersécurité</h3>
+                            <p class="news-description">
+                                La première édition du DakarCTF rassemble les meilleures équipes sénégalaises pour une compétition 
+                                de 48 heures. Des défis variés couvrant le web, la cryptographie, le reverse engineering et le pwn. 
+                                Organisé par DakarTech-Hack en partenariat avec les universités locales.
+                            </p>
+                            <div class="news-tags">
+                                <span class="news-tag">CTF</span>
+                                <span class="news-tag">Sénégal</span>
+                                <span class="news-tag">National</span>
+                            </div>
+                        </div>
+
+                        <div class="news-card">
+                            <div class="news-header">
+                                <span class="news-date">Octobre 2025</span>
+                                <span class="news-category">CTF Sénégal</span>
+                            </div>
+                            <h3 class="news-title">Senegal Cyber Challenge 2025 : Résultats</h3>
+                            <p class="news-description">
+                                L'équipe de l'UCAD remporte la première place du Senegal Cyber Challenge 2025 avec 8500 points. 
+                                La compétition a vu la participation de 15 équipes universitaires du pays, démontrant la montée en 
+                                compétences de la communauté cybersécurité sénégalaise.
+                            </p>
+                            <div class="news-tags">
+                                <span class="news-tag">CTF</span>
+                                <span class="news-tag">Sénégal</span>
+                                <span class="news-tag">Université</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- CTF Afrique -->
+                <!-- <div class="ctf-subtab-content" id="subtab-afrique">
+                    <div class="news-content">
+                        <div class="news-card">
+                            <div class="news-header">
+                                <span class="news-date">Avril 2026</span>
+                                <span class="news-category">CTF Afrique</span>
+                            </div>
+                            <h3 class="news-title">AfricaCTF 2026 : Championnat continental</h3>
+                            <p class="news-description">
+                                Le championnat africain de CTF rassemble les meilleures équipes du continent pour une compétition 
+                                de haut niveau. Plus de 50 équipes de 20 pays africains participent à cette édition 2026, avec des 
+                                défis adaptés aux réalités locales et des prix attractifs.
+                            </p>
+                            <div class="news-tags">
+                                <span class="news-tag">CTF</span>
+                                <span class="news-tag">Afrique</span>
+                                <span class="news-tag">Championnat</span>
+                            </div>
+                        </div>
+
+                        <div class="news-card">
+                            <div class="news-header">
+                                <span class="news-date">Février 2026</span>
+                                <span class="news-category">CTF Afrique</span>
+                            </div>
+                            <h3 class="news-title">West Africa CTF 2026 : Compétition régionale</h3>
+                            <p class="news-description">
+                                La compétition CTF de l'Afrique de l'Ouest réunit les équipes du Sénégal, Mali, Côte d'Ivoire, 
+                                Burkina Faso et autres pays de la région. Un événement clé pour renforcer la collaboration entre 
+                                les communautés de cybersécurité ouest-africaines.
+                            </p>
+                            <div class="news-tags">
+                                <span class="news-tag">CTF</span>
+                                <span class="news-tag">Afrique de l'Ouest</span>
+                                <span class="news-tag">Régional</span>
+                            </div>
+                        </div>
+
+                        <div class="news-card">
+                            <div class="news-header">
+                                <span class="news-date">Janvier 2026</span>
+                                <span class="news-category">CTF Afrique</span>
+                            </div>
+                            <h3 class="news-title">Morocco CTF 2026 : L'équipe marocaine domine</h3>
+                            <p class="news-description">
+                                L'équipe marocaine "CyberMorocco" remporte le Morocco CTF 2026 avec une avance significative. 
+                                La compétition a attiré des participants de toute l'Afrique du Nord et a mis en lumière le 
+                                talent émergent de la région.
+                            </p>
+                            <div class="news-tags">
+                                <span class="news-tag">CTF</span>
+                                <span class="news-tag">Maroc</span>
+                                <span class="news-tag">Afrique du Nord</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- CTF Europe -->
+                <!-- <div class="ctf-subtab-content" id="subtab-europe">
+                    <div class="news-content">
+                        <div class="news-card">
+                            <div class="news-header">
+                                <span class="news-date">Mai 2026</span>
+                                <span class="news-category">CTF Europe</span>
+                            </div>
+                            <h3 class="news-title">European Cyber Security Challenge 2026</h3>
+                            <p class="news-description">
+                                Le championnat européen de cybersécurité rassemble les meilleurs jeunes talents du continent. 
+                                Des équipes nationales s'affrontent dans des épreuves de hacking éthique, de cryptographie et 
+                                d'analyse forensique. Un événement majeur pour découvrir les futurs experts européens.
+                            </p>
+                            <div class="news-tags">
+                                <a class="news-tag" href="https://ecsc.eu/" target="_blank" rel="noopener noreferrer">
+                                    Site officiel ECSC
+                                </a>
+                                <span class="news-tag">CTF</span>
+                                <span class="news-tag">Europe</span>
+                            </div>
+                        </div>
+
+                        <div class="news-card">
+                            <div class="news-header">
+                                <span class="news-date">Mars 2026</span>
+                                <span class="news-category">CTF Europe</span>
+                            </div>
+                            <h3 class="news-title">Insomni'hack 2026 : Le CTF suisse de référence</h3>
+                            <p class="news-description">
+                                Insomni'hack est l'un des CTF les plus prestigieux d'Europe, organisé en Suisse. L'édition 2026 
+                                propose des défis techniques de très haut niveau et attire des équipes du monde entier. 
+                                Un événement incontournable pour les passionnés de CTF.
+                            </p>
+                            <div class="news-tags">
+                                <a class="news-tag" href="https://insomnihack.ch/" target="_blank" rel="noopener noreferrer">
+                                    Site Insomni'hack
+                                </a>
+                                <span class="news-tag">CTF</span>
+                                <span class="news-tag">Suisse</span>
+                            </div>
+                        </div>
+
+                        <div class="news-card">
+                            <div class="news-header">
+                                <span class="news-date">Juin 2026</span>
+                                <span class="news-category">CTF Europe</span>
+                            </div>
+                            <h3 class="news-title">PlaidCTF 2026 : Le CTF de Carnegie Mellon</h3>
+                            <p class="news-description">
+                                Organisé par l'équipe PPP (Plaid Parliament of Pwning) de Carnegie Mellon, PlaidCTF est l'un des 
+                                CTF les plus techniques au monde. Des défis extrêmement difficiles qui poussent les limites de la 
+                                recherche en sécurité informatique.
+                            </p>
+                            <div class="news-tags">
+                                <a class="news-tag" href="https://plaidctf.com/" target="_blank" rel="noopener noreferrer">
+                                    Site PlaidCTF
+                                </a>
+                                <span class="news-tag">CTF</span>
+                                <span class="news-tag">États-Unis</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- CTF Autres -->
+                <!-- <div class="ctf-subtab-content" id="subtab-autres">
+                    <div class="news-content">
+                        <div class="news-card">
+                            <div class="news-header">
+                                <span class="news-date">Août 2026</span>
+                                <span class="news-category">CTF International</span>
+                            </div>
+                            <h3 class="news-title">DEF CON CTF 2026 : La finale mondiale</h3>
+                            <p class="news-description">
+                                Le DEF CON CTF est considéré comme le "Super Bowl" des compétitions CTF. Seules les meilleures 
+                                équipes du monde y participent après avoir remporté des qualifications régionales. Un niveau 
+                                technique exceptionnel et des défis uniques.
+                            </p>
+                            <div class="news-tags">
+                                <a class="news-tag" href="https://defcon.org/html/links/dc-ctf.html" target="_blank" rel="noopener noreferrer">
+                                    DEF CON CTF
+                                </a>
+                                <span class="news-tag">CTF</span>
+                                <span class="news-tag">International</span>
+                            </div>
+                        </div>
+
+                        <div class="news-card">
+                            <div class="news-header">
+                                <span class="news-date">Décembre 2025</span>
+                                <span class="news-category">CTF International</span>
+                            </div>
+                            <h3 class="news-title">HackTheBox CTF Championship 2025</h3>
+                            <p class="news-description">
+                                HackTheBox organise son championnat annuel avec des milliers d'équipes participantes. La compétition 
+                                se déroule en plusieurs phases avec des défis progressifs, culminant en une finale mondiale. 
+                                Des prix importants et une reconnaissance internationale.
+                            </p>
+                            <div class="news-tags">
+                                <a class="news-tag" href="https://www.hackthebox.com/" target="_blank" rel="noopener noreferrer">
+                                    HackTheBox
+                                </a>
+                                <span class="news-tag">CTF</span>
+                                <span class="news-tag">Online</span>
+                            </div>
+                        </div>
+
+                        <div class="news-card">
+                            <div class="news-header">
+                                <span class="news-date">Novembre 2025</span>
+                                <span class="news-category">CTF International</span>
+                            </div>
+                            <h3 class="news-title">Google CTF 2025 : Les défis de Google</h3>
+                            <p class="news-description">
+                                Google organise son CTF annuel avec des défis créés par ses ingénieurs en sécurité. La compétition 
+                                attire des milliers d'équipes et offre des opportunités de recrutement pour les meilleurs participants. 
+                                Des défis innovants et des technologies de pointe.
+                            </p>
+                            <div class="news-tags">
+                                <a class="news-tag" href="https://capturetheflag.withgoogle.com/" target="_blank" rel="noopener noreferrer">
+                                    Google CTF
+                                </a>
+                                <span class="news-tag">CTF</span>
+                                <span class="news-tag">Google</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Particles -->
+    <script>
+        // Create floating particles
+        for (let i = 0; i < 15; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            document.body.appendChild(particle);
+        }
+
+        // Tab switching functionality
+
+        // Tab switching functionality
+        const newsTabs = document.querySelectorAll('.news-tab');
+        const newsTabContents = document.querySelectorAll('.news-tab-content');
+
+        newsTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetTab = tab.getAttribute('data-tab');
+
+                // Remove active class from all tabs and contents
+                newsTabs.forEach(t => t.classList.remove('active'));
+                newsTabContents.forEach(content => content.classList.remove('active'));
+
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                document.getElementById(`tab-${targetTab}`).classList.add('active');
+
+                // Reset CTF subtabs if switching to CTF tab
+                if (targetTab === 'ctf') {
+                    const ctfSubtabs = document.querySelectorAll('.ctf-subtab');
+                    const ctfSubtabContents = document.querySelectorAll('.ctf-subtab-content');
+                    ctfSubtabs.forEach(st => st.classList.remove('active'));
+                    ctfSubtabContents.forEach(sc => sc.classList.remove('active'));
+                    if (ctfSubtabs.length > 0) {
+                        ctfSubtabs[0].classList.add('active');
+                        ctfSubtabContents[0].classList.add('active');
+                    }
+                }
+            });
+        });
+
+        // CTF Sub-tab switching functionality
+        const ctfSubtabs = document.querySelectorAll('.ctf-subtab');
+        const ctfSubtabContents = document.querySelectorAll('.ctf-subtab-content');
+
+        ctfSubtabs.forEach(subtab => {
+            subtab.addEventListener('click', () => {
+                const targetSubtab = subtab.getAttribute('data-subtab');
+
+                // Remove active class from all subtabs and contents
+                ctfSubtabs.forEach(st => st.classList.remove('active'));
+                ctfSubtabContents.forEach(sc => sc.classList.remove('active'));
+
+                // Add active class to clicked subtab and corresponding content
+                subtab.classList.add('active');
+                document.getElementById(`subtab-${targetSubtab}`).classList.add('active');
+            });
+        });
+
+        async function loadNews() {
+            const container = document.getElementById('news-container-dynamic');
+            try {
+                const res = await fetch(window.API + '/api/news');
+                const data = await res.json();
+
+                if (data.success && data.data.articles.length > 0) {
+                    container.innerHTML = '';
+                    data.data.articles.forEach(article => {
+                        const date = new Date(article.published_at).toLocaleDateString('fr-FR', {
+                            month: 'long',
+                            year: 'numeric'
+                        });
+
+                        const card = `
+                            <div class="news-card">
+                                <div class="news-header">
+                                    <span class="news-date">${date}</span>
+                                    <span class="news-category">Actualité</span>
+                                </div>
+                                <h3 class="news-title">${article.title}</h3>
+                                <p class="news-description">${article.content}</p>
+                                <div class="news-tags">
+                                    <span class="news-tag">Auteur: ${article.author}</span>
+                                </div>
+                            </div>
+                        `;
+                        container.innerHTML += card;
+                    });
+                } else {
+                    container.innerHTML = '<div style="text-align: center; color: var(--text-gray); padding: 50px;">Aucune actualité pour le moment.</div>';
+                }
+            } catch (e) {
+                container.innerHTML = '<div style="text-align: center; color: var(--accent-red); padding: 50px;">Erreur lors du chargement des actualités.</div>';
+            }
+        }
+
+        window.addEventListener('load', loadNews);
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer-main">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>DakarTech<span>Hack</span></h3>
+                <p style="color:var(--text-gray); line-height:1.6;">L'élite de la cybersécurité au Sénégal. Forgez vos
+                    compétences, protégez l'infrastructure.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="ctfs.html">Warzone CTFs</a></li>
+                    <li><a href="forum.html">Forum</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Ressources</h4>
+                <ul>
+                    <li><a href="actualite.html">Actualités</a></li>
+                    <li><a href="contact.html">Besoin d'aide ?</a></li>
+                    <li><a href="about.html">À Propos</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 DakarTech-Hack. Tous droits réservés.</p>
+        </div>
+    </footer>
+    <script src="nav-helper.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,656 @@
+/* Team Pages Styles */
+.team-page-container {
+    padding-top: 100px;
+    min-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 80px;
+}
+
+.team-page-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.team-page-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--accent-cyan);
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.team-page-subtitle {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: var(--text-gray);
+    margin-bottom: 30px;
+}
+
+.team-page-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-add-member {
+    display: inline-block;
+    padding: 15px 30px;
+    background: linear-gradient(135deg, var(--accent-cyan), #0066FF);
+    color: var(--text-white);
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0, 217, 255, 0.4);
+}
+
+.btn-add-member:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 217, 255, 0.6);
+}
+
+.btn-back {
+    display: inline-block;
+    padding: 15px 30px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 217, 255, 0.3);
+    color: var(--text-white);
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+    border-color: var(--accent-cyan);
+    background: rgba(0, 217, 255, 0.1);
+}
+
+/* Team Members Grid - Updated for "Small Squares" */
+.team-members-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.member-card {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 217, 255, 0.2);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    aspect-ratio: 1 / 1.2;
+    /* Force a more squared shape */
+    justify-content: center;
+}
+
+.member-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 15px 35px rgba(0, 217, 255, 0.2);
+}
+
+.member-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-cyan), #0066FF);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-white);
+    margin-bottom: 15px;
+    box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+    text-transform: uppercase;
+    overflow: hidden;
+    border: 2px solid var(--accent-cyan);
+    flex-shrink: 0;
+}
+
+.member-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.member-info {
+    width: 100%;
+}
+
+.member-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-white);
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.member-role {
+    font-size: 0.75rem;
+    color: var(--accent-cyan);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+/* Specialties Badges */
+.specialties-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.specialty-badge {
+    font-size: 0.65rem;
+    background: rgba(0, 217, 255, 0.1);
+    border: 1px solid rgba(0, 217, 255, 0.3);
+    color: var(--accent-cyan);
+    padding: 2px 8px;
+    border-radius: 100px;
+}
+
+.btn-voir-plus {
+    background: transparent;
+    border: 1px solid var(--accent-cyan);
+    color: var(--accent-cyan);
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: auto;
+}
+
+.btn-voir-plus:hover {
+    background: var(--accent-cyan);
+    color: black;
+}
+
+/* Detail Modal */
+.detail-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(15px);
+    z-index: 3000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.detail-modal.show {
+    display: flex;
+}
+
+.detail-content {
+    background: #0a1628;
+    border: 1px solid var(--accent-cyan);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 500px;
+    padding: 40px;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 0 50px rgba(0, 217, 255, 0.2);
+}
+
+.detail-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    color: var(--text-gray);
+    cursor: pointer;
+}
+
+.detail-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid var(--accent-cyan);
+    margin: 0 auto 20px;
+    overflow: hidden;
+}
+
+.detail-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.detail-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    color: var(--accent-cyan);
+    margin-bottom: 5px;
+}
+
+.detail-role {
+    font-size: 1rem;
+    color: var(--text-white);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.detail-bio {
+    color: var(--text-gray);
+    line-height: 1.6;
+    margin-bottom: 30px;
+    font-size: 1rem;
+}
+
+.member-actions {
+    width: 100%;
+    margin-top: auto;
+}
+
+.btn-delete {
+    display: inline-block;
+    padding: 10px 20px;
+    background: rgba(255, 0, 0, 0.2);
+    border: 1px solid rgba(255, 0, 0, 0.4);
+    color: #ff6b6b;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.btn-delete:hover {
+    background: rgba(255, 0, 0, 0.3);
+    border-color: #ff6b6b;
+    transform: translateY(-2px);
+}
+
+/* Captain Section */
+.captain-section {
+    margin-bottom: 60px;
+}
+
+.section-subtitle {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--accent-cyan);
+    margin-bottom: 30px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.captain-card {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--accent-cyan);
+    border-radius: 12px;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    box-shadow: 0 15px 40px rgba(0, 217, 255, 0.3);
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.captain-avatar {
+    width: 120px;
+    height: 120px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.captain-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.captain-avatar .avatar-fallback {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-white);
+}
+
+.crown-icon {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+}
+
+.captain-role {
+    color: #ffd700;
+    font-weight: 600;
+}
+
+.members-section {
+    margin-top: 60px;
+}
+
+/* Empty State */
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px dashed rgba(0, 217, 255, 0.3);
+    border-radius: 12px;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.empty-state h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    color: var(--accent-cyan);
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    color: var(--text-gray);
+    margin-bottom: 25px;
+}
+
+/* Form Page */
+.form-page-container {
+    padding-top: 100px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px 80px;
+}
+
+.form-container {
+    max-width: 600px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 217, 255, 0.3);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+.form-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent-cyan);
+    margin-bottom: 10px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.form-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-gray);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.member-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--accent-cyan);
+    letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 12px 15px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(0, 217, 255, 0.3);
+    border-radius: 8px;
+    color: var(--text-white);
+    font-size: 1rem;
+    font-family: 'Work Sans', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.checkbox-group {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    flex: 1;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--accent-cyan);
+}
+
+.checkbox-label span {
+    color: var(--text-white);
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+}
+
+.form-help {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    margin: 0;
+    margin-top: 5px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.btn-submit {
+    flex: 1;
+    padding: 15px;
+    background: linear-gradient(135deg, var(--accent-cyan), #0066FF);
+    color: var(--text-white);
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0, 217, 255, 0.4);
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 217, 255, 0.6);
+}
+
+.btn-cancel {
+    flex: 1;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 217, 255, 0.3);
+    color: var(--text-white);
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.btn-cancel:hover {
+    border-color: var(--accent-cyan);
+    background: rgba(0, 217, 255, 0.1);
+}
+
+.alert {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+}
+
+.alert-error {
+    background: rgba(255, 0, 0, 0.2);
+    border: 1px solid rgba(255, 0, 0, 0.4);
+    color: #ff6b6b;
+}
+
+.alert-success {
+    background: rgba(0, 255, 0, 0.2);
+    border: 1px solid rgba(0, 255, 0, 0.4);
+    color: #6bff6b;
+}
+
+.login-info {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(0, 217, 255, 0.1);
+    border: 1px solid rgba(0, 217, 255, 0.3);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.info-text {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.info-text code {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: var(--accent-cyan);
+    font-family: 'Courier New', monospace;
+}
+
+.info-text small {
+    display: block;
+    margin-top: 10px;
+    color: var(--text-gray);
+    opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .team-page-container {
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 90px;
+    }
+
+    .team-page-title {
+        font-size: 1.8rem;
+    }
+
+    .team-members-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .captain-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 20px;
+        gap: 20px;
+    }
+
+    .captain-avatar {
+        width: 100px;
+        height: 100px;
+    }
+
+    .form-container {
+        padding: 30px 20px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .checkbox-group {
+        flex-direction: column;
+    }
+}

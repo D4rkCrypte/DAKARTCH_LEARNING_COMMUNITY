@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API Backend - DakarTech-Hack</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: linear-gradient(135deg, #0A1628 0%, #1a2942 50%, #0A1628 100%);
+            color: #fff;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00D9FF;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            border-radius: 12px;
+        }
+
+        .test-section h3 {
+            color: #00D9FF;
+            margin-bottom: 15px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .form-group {
+            margin: 10px 0;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #00D9FF;
+            box-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
+        }
+
+        button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #00D9FF, #0099cc);
+            color: #0A1628;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: 'Orbitron', sans-serif;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 217, 255, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 8px;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .success {
+            color: #6bff9e;
+            border-left: 3px solid #6bff9e;
+        }
+
+        .error {
+            color: #ff6b6b;
+            border-left: 3px solid #ff6b6b;
+        }
+
+        .info {
+            color: #00D9FF;
+            border-left: 3px solid #00D9FF;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-online {
+            background: #6bff9e;
+            box-shadow: 0 0 10px #6bff9e;
+        }
+
+        .status-offline {
+            background: #ff6b6b;
+            box-shadow: 0 0 10px #ff6b6b;
+        }
+
+        .token-display {
+            word-break: break-all;
+            font-size: 11px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🧪 Test API Backend DakarTech-Hack</h1>
+
+        <!-- Status Check -->
+        <div class="test-section">
+            <h3>
+                <span id="status-indicator" class="status-indicator status-offline"></span>
+                Statut du serveur
+            </h3>
+            <button onclick="checkStatus()">Vérifier la connexion</button>
+            <div id="status-result" class="result"></div>
+        </div>
+
+        <!-- Health Check -->
+        <div class="test-section">
+            <h3>1. Health Check</h3>
+            <button onclick="testHealth()">Tester /health</button>
+            <div id="health-result" class="result"></div>
+        </div>
+
+        <!-- Register -->
+        <div class="test-section">
+            <h3>2. Inscription (Register)</h3>
+            <div class="form-group">
+                <input type="text" id="username" placeholder="Username" value="testuser">
+            </div>
+            <div class="form-group">
+                <input type="email" id="email" placeholder="Email" value="test@example.com">
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" placeholder="Password" value="Test1234!">
+            </div>
+            <button onclick="testRegister()">S'inscrire</button>
+            <div id="register-result" class="result"></div>
+        </div>
+
+        <!-- Login -->
+        <div class="test-section">
+            <h3>3. Connexion (Login)</h3>
+            <div class="form-group">
+                <input type="email" id="login-email" placeholder="Email" value="test@example.com">
+            </div>
+            <div class="form-group">
+                <input type="password" id="login-password" placeholder="Password" value="Test1234!">
+            </div>
+            <button onclick="testLogin()">Se connecter</button>
+            <div id="login-result" class="result"></div>
+        </div>
+
+        <!-- Profile -->
+        <div class="test-section">
+            <h3>4. Profil utilisateur (nécessite token)</h3>
+            <div class="form-group">
+                <input type="text" id="token" placeholder="Token JWT (sera rempli automatiquement)">
+            </div>
+            <button onclick="testProfile()">Récupérer mon profil</button>
+            <div id="profile-result" class="result"></div>
+        </div>
+
+        <!-- Get Users (Admin) -->
+        <div class="test-section">
+            <h3>5. Liste des utilisateurs (Admin seulement)</h3>
+            <div class="form-group">
+                <input type="text" id="admin-token" placeholder="Token Admin">
+            </div>
+            <button onclick="testGetUsers()">Récupérer tous les utilisateurs</button>
+            <div id="users-result" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        function apiBaseUrl() {
+            const origin = window.location.origin;
+            const path = window.location.pathname;
+            const idx = path.toLowerCase().indexOf('/front-end/');
+            const base = idx >= 0 ? path.slice(0, idx) : '';
+            return origin + base + '/Back-end/public';
+        }
+
+        const API_URL = apiBaseUrl();
+
+        // Vérifier le statut au chargement
+        window.addEventListener('load', () => {
+            checkStatus();
+        });
+
+        async function checkStatus() {
+            const indicator = document.getElementById('status-indicator');
+            const resultDiv = document.getElementById('status-result');
+
+            try {
+                const response = await fetch(`${API_URL}/health`);
+                if (response.ok) {
+                    indicator.className = 'status-indicator status-online';
+                    resultDiv.className = 'result success';
+                    resultDiv.textContent = '✅ Serveur en ligne et opérationnel';
+                } else {
+                    throw new Error('Serveur répond mais avec une erreur');
+                }
+            } catch (error) {
+                indicator.className = 'status-indicator status-offline';
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Serveur hors ligne ou inaccessible\n\nErreur: ${error.message}\n\nVérifiez que:\n1. Le serveur backend est démarré (npm run dev)\n2. Le port 3000 est libre\n3. CORS est configuré correctement`;
+            }
+        }
+
+        async function testHealth() {
+            const resultDiv = document.getElementById('health-result');
+            resultDiv.textContent = '⏳ Envoi de la requête...';
+            resultDiv.className = 'result info';
+
+            try {
+                const response = await fetch(`${API_URL}/health`);
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.textContent = `✅ Succès (${response.status})\n\n${JSON.stringify(data, null, 2)}`;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.textContent = `❌ Erreur (${response.status})\n\n${JSON.stringify(data, null, 2)}`;
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Erreur de connexion\n\n${error.message}`;
+            }
+        }
+
+        async function testRegister() {
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const resultDiv = document.getElementById('register-result');
+
+            if (!username || !email || !password) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = '❌ Veuillez remplir tous les champs';
+                return;
+            }
+
+            resultDiv.textContent = '⏳ Inscription en cours...';
+            resultDiv.className = 'result info';
+
+            try {
+                const response = await fetch(`${API_URL}/api/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email, password })
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.textContent = `✅ Inscription réussie (${response.status})\n\n${JSON.stringify(data, null, 2)}`;
+
+                    // Sauvegarder le token
+                    if (data.data?.token) {
+                        document.getElementById('token').value = data.data.token;
+                        document.getElementById('admin-token').value = data.data.token;
+                    }
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.textContent = `❌ Erreur (${response.status})\n\n${JSON.stringify(data, null, 2)}`;
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Erreur de connexion\n\n${error.message}\n\nVérifiez que le serveur backend est démarré.`;
+            }
+        }
+
+        async function testLogin() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const resultDiv = document.getElementById('login-result');
+
+            if (!email || !password) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = '❌ Veuillez remplir tous les champs';
+                return;
+            }
+
+            resultDiv.textContent = '⏳ Connexion en cours...';
+            resultDiv.className = 'result info';
+
+            try {
+                const response = await fetch(`${API_URL}/api/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.textContent = `✅ Connexion réussie (${response.status})\n\n${JSON.stringify(data, null, 2)}`;
+
+                    // Sauvegarder le token
+                    if (data.data?.token) {
+                        document.getElementById('token').value = data.data.token;
+                        if (data.data.user.role === 'ADMIN') {
+                            document.getElementById('admin-token').value = data.data.token;
+                        }
+                    }
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.textContent = `❌ Erreur (${response.status})\n\n${JSON.stringify(data, null, 2)}`;
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Erreur de connexion\n\n${error.message}`;
+            }
+        }
+
+        async function testProfile() {
+            const token = document.getElementById('token').value;
+            const resultDiv = document.getElementById('profile-result');
+
+            if (!token) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = '❌ Token requis. Connectez-vous d\'abord ou inscrivez-vous.';
+                return;
+            }
+
+            resultDiv.textContent = '⏳ Récupération du profil...';
+            resultDiv.className = 'result info';
+
+            try {
+                const response = await fetch(`${API_URL}/api/auth/profile`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.textContent = `✅ Profil récupéré (${response.status})\n\n${JSON.stringify(data, null, 2)}`;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.textContent = `❌ Erreur (${response.status})\n\n${JSON.stringify(data, null, 2)}`;
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Erreur de connexion\n\n${error.message}`;
+            }
+        }
+
+        async function testGetUsers() {
+            const token = document.getElementById('admin-token').value;
+            const resultDiv = document.getElementById('users-result');
+
+            if (!token) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = '❌ Token admin requis. Connectez-vous avec un compte admin.';
+                return;
+            }
+
+            resultDiv.textContent = '⏳ Récupération des utilisateurs...';
+            resultDiv.className = 'result info';
+
+            try {
+                const response = await fetch(`${API_URL}/api/users`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.textContent = `✅ Utilisateurs récupérés (${response.status})\n\n${JSON.stringify(data, null, 2)}`;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.textContent = `❌ Erreur (${response.status})\n\n${JSON.stringify(data, null, 2)}`;
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Erreur de connexion\n\n${error.message}`;
+            }
+        }
+    </script>
+    <script src="nav-helper.js"></script>
+</body>
+
+</html>

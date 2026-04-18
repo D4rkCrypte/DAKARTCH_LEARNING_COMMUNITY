@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentors - DakarTech-Hack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Work+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="team-pages.css">
+    <script src="api-config.js"></script>
+    <style>
+        .mentor-chat-btn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: rgba(0, 217, 255, 0.1);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            border-radius: 6px;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .mentor-chat-btn:hover {
+            background: var(--accent-cyan);
+            color: black;
+            box-shadow: 0 0 15px var(--accent-cyan);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-effects">
+        <div class="grid-overlay"></div>
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <span class="logo-text">DakarTech-Hack</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Accueil</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">À propos</a></li>
+                <li class="nav-item"><a href="ctfs.html" class="nav-link">CTFs</a></li>
+                <li class="nav-item"><a href="mentors.html" class="nav-link active">Mentors</a></li>
+                <li class="nav-item"><a href="forum.html" class="nav-link">Forum</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="team-page-container">
+        <div class="team-page-header">
+            <h1 class="team-page-title">Nos Mentors</h1>
+            <p class="team-page-subtitle">Experts & Conseillers</p>
+            <div class="team-page-actions">
+                <a href="index.html" class="btn-back">← Accueil</a>
+            </div>
+        </div>
+
+        <div class="team-members-grid" id="mentorsGrid">
+            <div class="empty-state">
+                <div class="empty-icon">🤝</div>
+                <h3>Chargement des mentors...</h3>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-main">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>DakarTech<span>Hack</span></h3>
+                <p style="color:var(--text-gray); line-height:1.6;">L'élite de la cybersécurité au Sénégal. Forgez vos
+                    compétences, protégez l'infrastructure.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="ctfs.html">Warzone CTFs</a></li>
+                    <li><a href="forum.html">Forum</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Ressources</h4>
+                <ul>
+                    <li><a href="actualite.html">Actualités</a></li>
+                    <li><a href="contact.html">Besoin d'aide ?</a></li>
+                    <li><a href="about.html">À Propos</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 DakarTech-Hack. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        async function loadMentors() {
+            const mentorsGrid = document.getElementById('mentorsGrid');
+            try {
+                const response = await fetch(window.API + '/api/mentors');
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+
+                const result = await response.json();
+                const mentors = (result.success && result.data && Array.isArray(result.data.mentors))
+                    ? result.data.mentors : [];
+
+                displayMentors(mentors, mentorsGrid);
+            } catch (error) {
+                console.error('Erreur chargement mentors:', error);
+                mentorsGrid.innerHTML = '<div class="empty-state"><div class="empty-icon">🤝</div><h3>Erreur de chargement</h3><p>' + error.message + '</p></div>';
+            }
+        }
+
+        function displayMentors(mentors, grid) {
+            grid.innerHTML = '';
+            if (mentors.length === 0) {
+                grid.innerHTML = '<div class="empty-state"><div class="empty-icon">🤝</div><h3>Aucun mentor pour le moment</h3><p>Revenez bientôt !</p></div>';
+                return;
+            }
+
+            mentors.forEach(function (m) {
+                const card = document.createElement('div');
+                card.className = 'member-card';
+
+                const avatarDiv = document.createElement('div');
+                avatarDiv.className = 'member-avatar';
+
+                if (m.avatar_url) {
+                    const img = document.createElement('img');
+                    img.src = m.avatar_url;
+                    img.alt = m.username;
+                    img.onerror = function () {
+                        this.style.display = 'none';
+                        fallback.style.display = 'flex';
+                    };
+                    avatarDiv.appendChild(img);
+                }
+                const fallback = document.createElement('span');
+                fallback.textContent = (m.username || '?').charAt(0).toUpperCase();
+                if (m.avatar_url) fallback.style.display = 'none';
+                avatarDiv.appendChild(fallback);
+                card.appendChild(avatarDiv);
+
+                const info = document.createElement('div');
+                info.className = 'member-info';
+
+                const nameEl = document.createElement('h3');
+                nameEl.className = 'member-name';
+                nameEl.textContent = m.username;
+                info.appendChild(nameEl);
+
+                const roleEl = document.createElement('p');
+                roleEl.className = 'member-role';
+                roleEl.textContent = 'Mentor Expert';
+                info.appendChild(roleEl);
+
+                const chatBtn = document.createElement('a');
+                chatBtn.href = 'forum.html';
+                chatBtn.className = 'mentor-chat-btn';
+                chatBtn.textContent = 'Contacter via Forum';
+                info.appendChild(chatBtn);
+
+                card.appendChild(info);
+                grid.appendChild(card);
+            });
+        }
+
+        loadMentors();
+    </script>
+    <script src="nav-helper.js"></script>
+</body>
+
+</html>

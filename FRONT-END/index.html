@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sécuriser l'Avenir Numérique - DakarTech-Hack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Work+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Background Effects -->
+    <div class="bg-effects">
+        <div class="grid-overlay"></div>
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <span class="logo-text">DakarTech-Hack</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">À propos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="ctfs.html" class="nav-link">CTFs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="mentors.html" class="nav-link">Mentors</a>
+                </li>
+                <li class="nav-item">
+                    <a href="actualite.html" class="nav-link">Actualité</a>
+                </li>
+                <li class="nav-item">
+                    <a href="forum.html" class="nav-link">Forum</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <!-- Main Heading -->
+        <h1 class="main-heading">DakarTech-Hack<br>Learning Community</h1>
+
+        <!-- Subtitle -->
+        <!-- <p class="subtitle">Protecting Data, People, and Progress in a Connected World</p> -->
+
+        <!-- Tagline Section -->
+        <div class="tagline-section">
+            <pre class="code-block"><code class="python-code"><span class="keyword">class</span> <span class="class-name">DakarTech_Hack</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="self">self</span>):
+        <span class="self">self</span>.mission = <span class="string">"Dominer les CTF"</span>
+        <span class="self">self</span>.status = <span class="string">"Actif"</span>
+        <span class="self">self</span>.mindset = <span class="string">"Inarrêtable"</span>
+    
+    <span class="keyword">def</span> <span class="function">capture_flag</span>(<span class="self">self</span>):
+        <span class="keyword">return</span> <span class="string">"FLAG{force_dans_chaque_flag}"</span></code></pre>
+        </div>
+
+    </div>
+
+    <!-- Floating Particles -->
+    <script>
+        // Create floating particles
+        for (let i = 0; i < 15; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            document.body.appendChild(particle);
+        }
+
+        // Smooth scroll for anchor links (only for same-page anchors)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+    <!-- <footer class="footer-main">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>DakarTech<span>Hack</span></h3>
+                <p style="color:var(--text-gray); line-height:1.6;">L'élite de la cybersécurité au Sénégal. Forgez vos
+                    compétences, protégez l'infrastructure.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="ctfs.html">Warzone CTFs</a></li>
+                    <li><a href="forum.html">Forum</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Ressources</h4>
+                <ul>
+                    <li><a href="actualite.html">Actualités</a></li>
+                    <li><a href="contact.html">Besoin d'aide ?</a></li>
+                    <li><a href="about.html">À Propos</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 DakarTech-Hack. Tous droits réservés.</p>
+        </div>
+    </footer> -->
+
+    <script src="nav-helper.js"></script>
+</body>
+
+</html>

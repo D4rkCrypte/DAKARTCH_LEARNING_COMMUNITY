@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion Forum - DakarTech-Hack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Work+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="forum.css">
+    <script src="api-config.js"></script>
+</head>
+
+<body>
+    <div class="bg-effects">
+        <div class="grid-overlay"></div>
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <section class="join-page-section"
+        style="padding: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+        <div class="about-container" style="max-width: 420px; width: 90%;">
+            <div class="forum-auth-gate" style="padding: 0;">
+                <div class="forum-auth-card"
+                    style="box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 0 30px rgba(0,217,255,0.1); border-radius: 20px; padding: 40px 30px;">
+                    <h2 class="forum-auth-title" style="font-size: 1.6rem; margin-bottom: 30px; letter-spacing: 1px;">
+                        ACCÈS FORUM</h2>
+
+                    <form id="forumLoginForm" class="forum-auth-form">
+
+
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <input type="text" id="login-username" name="username" required
+                                placeholder="Nom d'utilisateur"
+                                style="text-align: center; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); height: 50px;">
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 25px;">
+                            <input type="password" id="login-password" name="password" required
+                                placeholder="Mot de passe"
+                                style="text-align: center; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); height: 50px;">
+                        </div>
+
+                        <div id="forumLoginMessage" class="submit-form-message"
+                            style="font-size: 0.85rem; margin-bottom: 20px;"></div>
+
+                        <button type="submit" class="submit-form-btn"
+                            style="border-radius: 12px; height: 55px; font-size: 1rem; letter-spacing: 1px; background: var(--accent-cyan); color: var(--primary-blue); border: none; font-weight: 700;">SE
+                            CONNECTER</button>
+                    </form>
+
+                    <div style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
+                        <a href="index.html"
+                            style="color: var(--text-gray); font-size: 0.85rem; text-decoration: none; opacity: 0.5; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;"
+                            onmouseover="this.style.opacity=1; this.style.color='var(--accent-cyan)';"
+                            onmouseout="this.style.opacity=0.5; this.style.color='var(--text-gray)';">
+                            <span>‹</span> Retour au portail
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Utilise window.API fourni par api-config.js
+        console.info('[Forum Login] Using API:', window.API);
+
+        document.getElementById('forumLoginForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const msg = document.getElementById('forumLoginMessage');
+            const btn = this.querySelector('.submit-form-btn');
+
+            msg.textContent = 'Connexion en cours...';
+            msg.className = 'submit-form-message';
+            msg.style.display = 'block';
+            msg.style.color = 'var(--accent-cyan)';
+            btn.disabled = true;
+
+            // Récupération des données
+            const fd = new FormData(this);
+            const body = Object.fromEntries(fd);
+
+            try {
+                const r = await fetch(window.API + '/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+
+                const data = await r.json();
+
+                if (r.ok && data.success) {
+                    // Sauvegarde session
+                    localStorage.setItem('forumToken', data.data.token);
+                    localStorage.setItem('forumRole', data.data.user.role);
+                    localStorage.setItem('forumUsername', data.data.user.username);
+                    localStorage.setItem('forumEmail', data.data.user.email);
+                    localStorage.setItem('forumUserId', data.data.user.id);
+                    localStorage.setItem('forumAvatar', data.data.user.avatar_url || '');
+
+                    msg.textContent = '✅ Connexion réussie !';
+                    msg.style.color = '#00ff88';
+
+                    setTimeout(() => {
+                        if (data.data.user.role === 'ADMIN' || data.data.user.role === 'SUPERADMIN') {
+                            window.location.href = 'admin.html';
+                        } else {
+                            window.location.href = 'dashboard.html';
+                        }
+                    }, 800);
+                } else {
+                    msg.textContent = data.error || 'Identifiants incorrects.';
+                    msg.style.color = '#ff4444';
+                    btn.disabled = false;
+                }
+            } catch (err) {
+                console.error('[Login Error]', err);
+                msg.textContent = '❌ Erreur de connexion au serveur.';
+                msg.style.color = '#ff4444';
+                btn.disabled = false;
+            }
+        });
+    </script>
+    <script src="nav-helper.js"></script>
+</body>
+
+</html>

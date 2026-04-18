@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Équipe CTF - DakarTech-Hack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Work+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="team-pages.css">
+    <script src="api-config.js"></script>
+</head>
+
+<body>
+    <!-- Background Effects -->
+    <div class="bg-effects">
+        <div class="grid-overlay"></div>
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <span class="logo-text">DakarTech-Hack</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">À propos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="join.html" class="nav-link">Nous rejoindre</a>
+                </li>
+                <li class="nav-item">
+                    <a href="ctfs.html" class="nav-link">CTFs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Team Members Section -->
+    <div class="team-page-container">
+        <div class="team-page-header">
+            <h1 class="team-page-title">Équipe CTF</h1>
+        </div>
+
+        <div class="team-members-grid" id="membersGrid">
+            <div class="empty-state">
+                <div class="empty-icon">🎯</div>
+                <h3>Chargement des membres...</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detail Modal -->
+    <div id="detailModal" class="detail-modal">
+        <div class="detail-content">
+            <span class="detail-close" onclick="closeModal()">&times;</span>
+            <div class="detail-avatar" id="modalAvatar"></div>
+            <h2 class="detail-name" id="modalName"></h2>
+            <p class="detail-role" id="modalRole"></p>
+            <div class="detail-bio" id="modalBio"></div>
+            <button class="btn-back" onclick="closeModal()">Fermer</button>
+        </div>
+    </div>
+
+
+    <!-- Footer (Using footer-main) -->
+    <footer class="footer-main">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-logo">DakarTech-Hack</h3>
+                    <p class="footer-description">
+                        L'excellence technologique au service de la cybersécurité au Sénégal.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="ctfs.html">CTFs</a></li>
+                        <li><a href="actualite.html">Actualités</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Communauté</h4>
+                    <ul class="footer-links">
+                        <li><a href="forum.html">Forum</a></li>
+                        <li><a href="join.html">Nous rejoindre</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 DakarTech-Hack. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                navToggle.classList.toggle('active');
+            });
+        }
+
+        async function loadMembers() {
+            const membersGrid = document.getElementById('membersGrid');
+            try {
+                const response = await fetch(window.API + '/api/team/ctf');
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const result = await response.json();
+                let members = [];
+                if (result.success && result.data && Array.isArray(result.data.members)) {
+                    members = result.data.members;
+                }
+                displayMembers(members);
+            } catch (error) {
+                console.error('Error loading members:', error);
+                membersGrid.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">🎯</div>
+                        <h3>Erreur de chargement</h3>
+                        <p style="font-size: 0.8rem; margin-top: 10px; color: var(--text-gray);">Erreur: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        function displayMembers(members) {
+            const membersGrid = document.getElementById('membersGrid');
+            if (members.length === 0) {
+                membersGrid.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">🎯</div>
+                        <h3>Aucun membre pour le moment</h3>
+                    </div>
+                `;
+                return;
+            }
+
+            membersGrid.innerHTML = members.map(member => {
+                const pseudo = escapeHtml(member.pseudo || 'Sans pseudo');
+                const avatar = escapeHtml(member.avatar_url || '');
+                const initial = pseudo.charAt(0).toUpperCase();
+                const role = escapeHtml(member.role || (member.is_captain == 1 ? 'Capitaine' : 'Membre Équipe'));
+
+                return `
+                <div class="member-card">
+                    <div class="member-avatar">
+                        ${member.is_captain == 1 ? '<span class="captain-badge" style="top: -5px; right: -5px; width: 30px; height: 30px; font-size: 1rem;">👑</span>' : ''}
+                        ${avatar ? `<img src="${avatar}" alt="${pseudo}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="avatar-fallback" style="display:none;">${initial}</span>` : `<span>${initial}</span>`}
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">${pseudo}</h3>
+                        <p class="member-role">${role}</p>
+                    </div>
+                    <button class="btn-voir-plus" onclick='showMemberDetail(${JSON.stringify(member).replace(/'/g, "&apos;")})'>Voir plus</button>
+                </div>
+                `;
+            }).join('');
+        }
+
+        function showMemberDetail(member) {
+            const modal = document.getElementById('detailModal');
+            const avatar = document.getElementById('modalAvatar');
+            const name = document.getElementById('modalName');
+            const role = document.getElementById('modalRole');
+            const bio = document.getElementById('modalBio');
+
+            const pseudo = escapeHtml(member.pseudo || 'Sans pseudo');
+            const img = escapeHtml(member.avatar_url || '');
+            const initial = pseudo.charAt(0).toUpperCase();
+
+            avatar.innerHTML = img ? `<img src="${img}" alt="${pseudo}">` : `<div class="avatar-fallback" style="background:var(--accent-cyan); width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:3rem; font-weight:900;">${initial}</div>`;
+            name.textContent = pseudo;
+            role.textContent = member.role || (member.is_captain == 1 ? 'Capitaine' : 'Membre Équipe');
+            bio.textContent = member.bio || "Aucune description disponible pour ce membre.";
+
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('detailModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Load members on page load
+        loadMembers();
+    </script>
+    <script src="nav-helper.js"></script>
+</body>
+
+</html>
