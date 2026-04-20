@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 return [
     'db' => [
-        'host' => '127.0.0.1',
-        'port' => 3306,
-        'name' => 'dakartech_hack',
-        'user' => 'root',
-        'pass' => '',
+        'host' => getenv('MYSQLHOST') ?: '127.0.0.1',
+        'port' => getenv('MYSQLPORT') ?: 3306,
+        'name' => getenv('MYSQLDATABASE') ?: 'dakartech_hack',
+        'user' => getenv('MYSQLUSER') ?: 'root',
+        'pass' => getenv('MYSQLPASSWORD') ?: '',
         'charset' => 'utf8mb4',
     ],
     'security' => [

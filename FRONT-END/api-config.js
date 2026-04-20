@@ -13,19 +13,27 @@
 (function () {
     'use strict';
 
-    // ── 1. Surcharge manuelle (si besoin d'un autre hôte/port) ─────────────
-    // Décommentez et ajustez si votre back-end est sur un port différent :
+    // ── 1. Surcharge manuelle pour la PRODUCTION ──────────────────────────
+    // REMPLACEZ cette URL par celle que Render vous donnera :
+    window.PRODUCTION_API_URL = ''; 
+    
+    // Si besoin d'un autre hôte/port local (dev) :
     // window.API_URL_OVERRIDE = 'http://localhost:8000';
     // ───────────────────────────────────────────────────────────────────────
-
+    
     function detectApiBaseUrl() {
-        // Priorité 1 : surcharge manuelle
+        // Priorité 1 : Surcharge production (Netlify -> Render)
+        if (window.PRODUCTION_API_URL && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+            return window.PRODUCTION_API_URL;
+        }
+
+        // Priorité 2 : surcharge manuelle locale
         if (window.API_URL_OVERRIDE) return window.API_URL_OVERRIDE;
 
         var origin = window.location.origin;   // ex: http://localhost
         var pathname = window.location.pathname; // ex: /ATTENTION04/FRONT-END/forum_login.html
 
-        // Priorité 2 : chemin XAMPP standard — /ATTENTION04/FRONT-END/
+        // Priorité 3 : chemin XAMPP standard — /ATTENTION04/FRONT-END/
         //  → donne http://localhost/ATTENTION04/BACK-END/public
         var matchXampp = pathname.match(/^(\/ATTENTION04)\//i);
         if (matchXampp) {
