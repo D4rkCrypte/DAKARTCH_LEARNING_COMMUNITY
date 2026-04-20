@@ -4,7 +4,7 @@
 .contact-section {
     position: relative;
     z-index: 1;
-    padding: 120px 40px 100px;
+    padding: 80px 40px 80px; /* Reduced from 120px/100px */
     min-height: 100vh;
 }
 
@@ -36,7 +36,7 @@
     backdrop-filter: blur(15px);
     border: 1px solid rgba(0, 217, 255, 0.3);
     border-radius: 16px;
-    padding: 40px;
+    padding: 30px; /* Reduced from 40px */
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(0, 217, 255, 0.05);
     transition: all 0.3s ease;
     position: relative;
@@ -75,7 +75,7 @@
 
 .form-section-title {
     font-family: 'Orbitron', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.1rem; /* Reduced from 1.2rem */
     font-weight: 600;
     color: var(--accent-cyan);
     margin-bottom: 10px;
@@ -126,13 +126,13 @@
 .form-select,
 .form-textarea {
     width: 100%;
-    padding: 14px 18px;
+    padding: 10px 12px; /* Reduced from 12px 15px */
     background: rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(0, 217, 255, 0.3);
     border-radius: 8px;
     color: var(--text-white);
     font-family: 'Work Sans', sans-serif;
-    font-size: 1rem;
+    font-size: 0.85rem; /* Reduced from 0.9rem */
     transition: all 0.3s ease;
     outline: none;
 }
@@ -169,13 +169,13 @@
 /* Submit Button */
 .btn-submit {
     margin-top: 10px;
-    padding: 16px 32px;
+    padding: 12px 25px; /* Reduced from 16px 32px */
     background: linear-gradient(135deg, var(--accent-cyan), #0099cc);
     border: none;
     border-radius: 8px;
     color: var(--primary-blue);
     font-family: 'Orbitron', sans-serif;
-    font-size: 1rem;
+    font-size: 0.9rem; /* Reduced from 1rem */
     font-weight: 600;
     letter-spacing: 1px;
     cursor: pointer;
@@ -298,8 +298,8 @@
 
 .contact-info-card {
     display: flex;
-    gap: 20px;
-    padding: 25px;
+    gap: 15px; /* Reduced from 20px */
+    padding: 20px; /* Reduced from 25px */
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(0, 217, 255, 0.2);
     border-radius: 12px;
@@ -331,14 +331,14 @@
 
 .info-icon-wrapper {
     flex-shrink: 0;
-    width: 60px;
-    height: 60px;
+    width: 48px; /* Reduced from 60px */
+    height: 48px; /* Reduced from 60px */
     display: flex;
     align-items: center;
     justify-content: center;
     background: rgba(0, 217, 255, 0.1);
     border: 1px solid rgba(0, 217, 255, 0.3);
-    border-radius: 12px;
+    border-radius: 10px; /* Reduced from 12px */
     transition: all 0.3s ease;
 }
 
@@ -350,7 +350,7 @@
 }
 
 .info-icon {
-    font-size: 1.8rem;
+    font-size: 1.4rem; /* Reduced from 1.8rem */
     filter: drop-shadow(0 0 8px rgba(0, 217, 255, 0.5));
 }
 
@@ -363,7 +363,7 @@
 
 .info-title {
     font-family: 'Orbitron', sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.1rem; /* Reduced from 1.2rem */
     font-weight: 600;
     color: var(--accent-cyan);
     margin: 0;

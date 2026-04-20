@@ -1,32 +1,32 @@
 /* Team Pages Styles */
 .team-page-container {
-    padding-top: 100px;
+    padding-top: 70px; /* Reduced from 100px */
     min-height: 100vh;
     max-width: 1200px;
     margin: 0 auto;
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-bottom: 80px;
+    padding-left: 20px; /* Reduced from 40px */
+    padding-right: 20px; /* Reduced from 40px */
+    padding-bottom: 60px; /* Reduced from 80px */
 }
 
 .team-page-header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 40px; /* Reduced from 60px */
 }
 
 .team-page-title {
     font-family: 'Orbitron', sans-serif;
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(1.5rem, 3.5vw, 2.2rem); /* Reduced from 2rem-5vw-3rem */
     font-weight: 700;
     color: var(--accent-cyan);
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     letter-spacing: 2px;
 }
 
 .team-page-subtitle {
-    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem); /* Reduced from 1rem-2vw-1.3rem */
     color: var(--text-gray);
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .team-page-actions {
@@ -38,12 +38,12 @@
 
 .btn-add-member {
     display: inline-block;
-    padding: 15px 30px;
+    padding: 10px 22px; /* Reduced from 15px 30px */
     background: linear-gradient(135deg, var(--accent-cyan), #0066FF);
     color: var(--text-white);
     text-decoration: none;
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 0.9rem; /* Reduced from 1rem */
     font-weight: 600;
     letter-spacing: 0.5px;
     transition: all 0.3s ease;
@@ -57,14 +57,14 @@
 
 .btn-back {
     display: inline-block;
-    padding: 15px 30px;
+    padding: 10px 22px; /* Reduced from 15px 30px */
     background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(0, 217, 255, 0.3);
     color: var(--text-white);
     text-decoration: none;
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 0.9rem; /* Reduced from 1rem */
     font-weight: 600;
     transition: all 0.3s ease;
 }
@@ -87,7 +87,7 @@
     backdrop-filter: blur(10px);
     border: 1px solid rgba(0, 217, 255, 0.2);
     border-radius: 12px;
-    padding: 20px;
+    padding: 15px;
     text-align: center;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
@@ -108,17 +108,17 @@
 }
 
 .member-avatar {
-    width: 80px;
-    height: 80px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--accent-cyan), #0066FF);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--text-white);
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
     text-transform: uppercase;
     overflow: hidden;
@@ -138,7 +138,7 @@
 
 .member-name {
     font-family: 'Orbitron', sans-serif;
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--text-white);
     margin-bottom: 5px;
@@ -301,10 +301,10 @@
 
 .section-subtitle {
     font-family: 'Orbitron', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.25rem; /* Reduced from 1.5rem */
     font-weight: 600;
     color: var(--accent-cyan);
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     text-align: center;
     letter-spacing: 1px;
 }
@@ -314,10 +314,10 @@
     backdrop-filter: blur(10px);
     border: 2px solid var(--accent-cyan);
     border-radius: 12px;
-    padding: 40px;
+    padding: 30px; /* Reduced from 40px */
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 25px; /* Reduced from 30px */
     box-shadow: 0 15px 40px rgba(0, 217, 255, 0.3);
     max-width: 800px;
     margin: 0 auto;
@@ -325,8 +325,8 @@
 }
 
 .captain-avatar {
-    width: 120px;
-    height: 120px;
+    width: 90px; /* Reduced from 120px */
+    height: 90px; /* Reduced from 120px */
     position: relative;
     flex-shrink: 0;
 }
@@ -424,7 +424,7 @@
 
 .form-title {
     font-family: 'Orbitron', sans-serif;
-    font-size: 2rem;
+    font-size: 1.6rem; /* Reduced from 2rem */
     font-weight: 700;
     color: var(--accent-cyan);
     margin-bottom: 10px;
@@ -461,12 +461,12 @@
 
 .form-group input,
 .form-group textarea {
-    padding: 12px 15px;
+    padding: 10px 14px; /* Reduced from 12px 15px */
     background: rgba(0, 0, 0, 0.4);
     border: 1px solid rgba(0, 217, 255, 0.3);
     border-radius: 8px;
     color: var(--text-white);
-    font-size: 1rem;
+    font-size: 0.95rem; /* Reduced from 1rem */
     font-family: 'Work Sans', sans-serif;
     transition: all 0.3s ease;
 }
@@ -525,12 +525,12 @@
 
 .btn-submit {
     flex: 1;
-    padding: 15px;
+    padding: 12px; /* Reduced from 15px */
     background: linear-gradient(135deg, var(--accent-cyan), #0066FF);
     color: var(--text-white);
     border: none;
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 0.95rem; /* Reduced from 1rem */
     font-weight: 600;
     letter-spacing: 0.5px;
     cursor: pointer;
@@ -545,14 +545,14 @@
 
 .btn-cancel {
     flex: 1;
-    padding: 15px;
+    padding: 12px; /* Reduced from 15px */
     background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(0, 217, 255, 0.3);
     color: var(--text-white);
     text-decoration: none;
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 0.95rem; /* Reduced from 1rem */
     font-weight: 600;
     text-align: center;
     transition: all 0.3s ease;

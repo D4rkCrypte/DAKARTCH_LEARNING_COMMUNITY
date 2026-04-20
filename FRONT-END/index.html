@@ -31,7 +31,7 @@
             </div>
             <ul class="nav-menu" id="navMenu">
                 <li class="nav-item">
-                    <a href="index.html" class="nav-link">Accueil</a>
+                    <a href="index.html" class="nav-link active">Accueil</a>
                 </li>
                 <li class="nav-item">
                     <a href="about.html" class="nav-link">À propos</a>
@@ -61,17 +61,14 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="container">
+    <div class="container hero-split">
+        <div class="hero-content-wrapper">
+            <!-- Main Heading -->
+            <h1 class="main-heading">DakarTech-Hack<br>Learning Community</h1>
 
-        <!-- Main Heading -->
-        <h1 class="main-heading">DakarTech-Hack<br>Learning Community</h1>
-
-        <!-- Subtitle -->
-        <!-- <p class="subtitle">Protecting Data, People, and Progress in a Connected World</p> -->
-
-        <!-- Tagline Section -->
-        <div class="tagline-section">
-            <pre class="code-block"><code class="python-code"><span class="keyword">class</span> <span class="class-name">DakarTech_Hack</span>:
+            <!-- Tagline Section -->
+            <div class="tagline-section">
+                <pre class="code-block"><code class="python-code"><span class="keyword">class</span> <span class="class-name">DakarTech_Hack</span>:
     <span class="keyword">def</span> <span class="function">__init__</span>(<span class="self">self</span>):
         <span class="self">self</span>.mission = <span class="string">"Dominer les CTF"</span>
         <span class="self">self</span>.status = <span class="string">"Actif"</span>
@@ -79,8 +76,15 @@
     
     <span class="keyword">def</span> <span class="function">capture_flag</span>(<span class="self">self</span>):
         <span class="keyword">return</span> <span class="string">"FLAG{force_dans_chaque_flag}"</span></code></pre>
+            </div>
         </div>
 
+        <div class="hero-image-wrapper">
+            <div class="image-frame">
+                <img src="assets/hacker_hero.png" alt="DakarTech Hacker" class="hero-img">
+                <div class="image-glow"></div>
+            </div>
+        </div>
     </div>
 
     <!-- Floating Particles -->
@@ -112,35 +116,6 @@
             });
         });
     </script>
-    <!-- <footer class="footer-main">
-        <div class="footer-container">
-            <div class="footer-brand">
-                <h3>DakarTech<span>Hack</span></h3>
-                <p style="color:var(--text-gray); line-height:1.6;">L'élite de la cybersécurité au Sénégal. Forgez vos
-                    compétences, protégez l'infrastructure.</p>
-            </div>
-            <div class="footer-links">
-                <h4>Navigation</h4>
-                <ul>
-                    <li><a href="index.html">Accueil</a></li>
-                    <li><a href="ctfs.html">Warzone CTFs</a></li>
-                    <li><a href="forum.html">Forum</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Ressources</h4>
-                <ul>
-                    <li><a href="actualite.html">Actualités</a></li>
-                    <li><a href="contact.html">Besoin d'aide ?</a></li>
-                    <li><a href="about.html">À Propos</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 DakarTech-Hack. Tous droits réservés.</p>
-        </div>
-    </footer> -->
-
     <script src="nav-helper.js"></script>
 </body>
 
