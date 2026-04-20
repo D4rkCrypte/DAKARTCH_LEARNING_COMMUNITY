@@ -11,35 +11,18 @@ L'objectif est de dynamiser l'élite de la cybersécurité au Sénégal en offra
 
 ## Fonctionnalités Principales
 
-### Plateforme CTF (Capture The Flag)
-- **Challenges Multi-catégories** : Web, Cryptographie, Reverse Engineering, PWN, Réseau, OSINT & Forensics.
-- **Validation Automatisée** : Système de soumission de flags avec vérification en temps réel.
-- **Leaderboard Dynamique** : Classement des participants basé sur les points accumulés et la rapidité de résolution.
-- **Progression Utilisateur** : Suivi des statistiques personnelles et des défis relevés.
-
-### Communauté & Collaboration
-- **Forum de Discussion** : Espace dédié pour poser des questions, partager des write-ups et collaborer.
-- **Système de Chat** : Communication en temps réel avec gestion de "likes" et réponses.
-- **Réseau de Mentors** : Accès à une équipe d'experts pour accompagner l'apprentissage.
-
-### Administration & Gestion
-- **Dashboard Admin Complet** : Gestion des utilisateurs (Membres, Mentors, Admins, Superadmins).
-- **Gestion des Contenus** : Publication d'actualités, ajout de nouveaux challenges CTF et gestion des membres de l'équipe.
-- **Sécurité** : Authentification robuste (hachage de mots de passe, gestion de tokens).
+### Design & Expérience Utilisateur (UI/UX)
+- **Refonte Premium** : Mise en œuvre d'un style "Glassmorphism" avec des effets de flou et de transparence avancés.
+- **Optimisation de Densité (Scaling)** : Réduction systématique de 20-25% de tous les éléments pour une interface plus dense, professionnelle et adaptée aux écrans haute résolution.
+- **Hero Section Dynamique** : Nouvelle mise en page split-screen avec imagerie cinématique et typographie réactive.
+- **Micro-interactions** : Animations de particules au survol et transitions fluides entre les pages via `nav-helper.js`.
 
 ---
 
-## Stack Technique
+## Documentation Technique 📚
 
-### Frontend
-- **HTML5 & CSS3** : Design moderne avec effets de "glow", orbes dynamiques et typographie **Orbitron**.
-- **JavaScript (Vanilla)** : Interactions fluides, gestion des particules et appels API asynchrones.
-- **Responsive Design** : Adapté aux écrans desktop et mobiles.
-
-### Backend
-- **PHP 8+** : Architecture modulaire avec un contrôleur frontal pour l'API REST.
-- **MySQL / MariaDB** : Base de données relationnelle structurée pour la persistance des données.
-- **PDO** : Utilisation de requêtes préparées pour prévenir les injections SQL.
+Le projet inclut désormais une documentation UML complète et académique :
+- **[UML_DOCUMENTATION.md](UML_DOCUMENTATION.md)** : Contient les diagrammes de Cas d'Utilisation (Global et Thématiques) ainsi que le Diagramme de Classes technique, tous conformes aux normes **UML 2.x**.
 
 ---
 
@@ -52,12 +35,14 @@ L'objectif est de dynamiser l'élite de la cybersécurité au Sénégal en offra
 │   ├── database/       # Scripts SQL et modèles de données
 │   └── config/         # Configuration du serveur
 ├── FRONT-END/
-│   ├── index.html      # Accueil du site
+│   ├── index.html      # Accueil du site (Nouveau Split-Hero)
 │   ├── ctfs.html       # Arène de compétition
 │   ├── forum.html      # Espace communautaire
-│   ├── style.css       # Design global (cyberpunk style)
+│   ├── style.css       # Design global (20% Scaled Refactor)
+│   ├── assets/         # Images et ressources visuelles
 │   └── ...             # Autres pages applicatives
-└── README.md           # Documentation du projet
+├── UML_DOCUMENTATION.md # Documentation UML 2.x Académique
+└── README.md           # Documentation générale du projet
 ```
 
 ---
